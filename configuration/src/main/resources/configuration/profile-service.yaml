@@ -1,0 +1,123 @@
+server:
+  port: 7009
+api:
+  title: Profile Service
+  description: API for Profile services
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      database: dev_profile
+      host: localhost
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://auth-server:9000
+          jwk-set-uri: http://auth-server:9000/oauth2/jwks
+      client:
+        registration:
+          profile-service-oidc:
+            provider: spring
+            client-id: profile-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: profile-service-oidc
+          profile-service:
+            provider: spring
+            client-id: profile-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: profile.read,profile.write
+            client-name: profile-service
+        provider:
+          spring:
+            issuer-uri: http://auth-server:9000
+authorization:
+  authorizationUrl: http://localhost:9999/authentication
+  tokenUrl: http://localhost:9999/authentication/oauth2/token
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      database: docker_profile
+      host: mongo
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://authentication-service:9000
+          jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+      client:
+        registration:
+          profile-service-oidc:
+            provider: spring
+            client-id: profile-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: profile-service-oidc
+          profile-service:
+            provider: spring
+            client-id: profile-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: profile.read,profile.write
+            client-name: profile-service
+        provider:
+          spring:
+            issuer-uri: http://authentication-service:9000
+
+authorization:
+  authorizationUrl: http://proxy-service:9999/authentication
+  tokenUrl: http://proxy-service:9999/authentication/oauth2/token
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      database: prod_profile
+      host: mongo
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://authentication-service:9000
+          jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+      client:
+        registration:
+          profile-service-oidc:
+            provider: spring
+            client-id: profile-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: profile-service-oidc
+          profile-service:
+            provider: spring
+            client-id: profile-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: profile.read,profile.write
+            client-name: profile-service
+        provider:
+          spring:
+            issuer-uri: http://authentication-service:9000
+authorization:
+  authorizationUrl: http://proxy-service:9999/authentication
+  tokenUrl: http://proxy-service:9999/authentication/oauth2/token

@@ -1,0 +1,178 @@
+server:
+  port: 7012
+
+api:
+  title: Media Processor Service
+  description: API for Media Processor services
+
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  codec:
+    max-in-memory-size: 1000MB
+  data:
+    mongodb:
+      database: dev_media-processor
+      host: localhost
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://auth-server:9000
+          jwk-set-uri: http://auth-server:9000/oauth2/jwks
+      client:
+        registration:
+          processor-service-oidc:
+            provider: spring
+            client-id: processor-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: processor-service-oidc
+          processor-service:
+            provider: spring
+            client-id: processor-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: processor-service
+        provider:
+          spring:
+            issuer-uri: http://auth-server:9000
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+      location: ${java.io.tmpdir}
+      enabled: true
+minio:
+  access-key: myaccesskey
+  url: http://localhost:47017
+  secret-key: mysecretkey
+  buckets:
+    - name: media-processor
+      objectLock: false
+      isDefault: true
+    - name: video
+      objectLock: false
+      isDefault: false
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  codec:
+    max-in-memory-size: 1000MB
+  data:
+    mongodb:
+      database: docker_media-processor
+      host: mongo
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://authentication-service:9000
+          jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+      client:
+        registration:
+          processor-service-oidc:
+            provider: spring
+            client-id: processor-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: processor-service-oidc
+          processor-service:
+            provider: spring
+            client-id: processor-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: processor-service
+        provider:
+          spring:
+            issuer-uri: http://authentication-service:9000
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+      location: ${java.io.tmpdir}
+      enabled: true
+minio:
+  access-key: myaccesskey
+  url: http://minio:9000
+  secret-key: mysecretkey
+  buckets:
+    - name: media-processor
+      objectLock: false
+      isDefault: true
+    - name: video
+      objectLock: false
+      isDefault: false
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  codec:
+    max-in-memory-size: 1000MB
+  data:
+    mongodb:
+      database: prod_media-processor
+      host: mongo
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://authentication-service:9000
+          jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+      client:
+        registration:
+          processor-service-oidc:
+            provider: spring
+            client-id: processor-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: processor-service-oidc
+          processor-service:
+            provider: spring
+            client-id: processor-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+            client-name: processor-service
+        provider:
+          spring:
+            issuer-uri: http://authentication-service:9000
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+      location: ${java.io.tmpdir}
+      enabled: true
+minio:
+  access-key: myaccesskey
+  url: http://minio:9000
+  secret-key: mysecretkey
+  buckets:
+    - name: media-processor
+      objectLock: false
+      isDefault: true
+    - name: video
+      objectLock: false
+      isDefault: false
