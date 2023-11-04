@@ -1,0 +1,44 @@
+server:
+  port: 8888
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        cloud:
+          gateway:
+            filter: INFO
+spring:
+  application:
+    name: configuration-service
+---
+spring:
+  config:
+    activate:
+      on-profile: docker, prod
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitlab.com/chehhhir/gramify-ms-configurations.git
+          default-label: main
+          force-pull: true
+          refresh-rate: 5
+          username: ${ CONFIG_READER_USERNAME }
+          password: ${ CONFIG_READER_PASSWORD }
+
+---
+spring:
+  config:
+    activate:
+      on-profile: native,dev
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configuration

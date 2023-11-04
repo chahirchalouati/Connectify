@@ -1,0 +1,21 @@
+# Update n.0
+
+
+configuration-service-build:
+  variables:
+    MODULE_NAME: configuration-service
+  extends:
+    - .build
+
+configuration-service-docker:
+  variables:
+    MODULE_NAME: configuration-service
+  extends:
+    - .docker
+
+configuration-service-deploy:
+  variables:
+    MODULE_NAME: configuration-service
+  extends:
+    - .deploy
+

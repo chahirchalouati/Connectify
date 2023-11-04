@@ -10,5 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
+        <module>configuration</module>
     </modules>
 </project>
