@@ -1,0 +1,193 @@
+version: '3.3'
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: server --console-address ":9001" /export
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+      - "47017:9000"
+      - "47018:9001"
+    environment:
+      MINIO_ROOT_USER: myaccesskey
+      MINIO_ROOT_PASSWORD: mysecretkey
+      MINIO_BUCKET: processor
+    volumes:
+      - minio:/export
+    networks:
+      - l_net
+
+  mysql-db:
+    image: mysql:8
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h mysql --silent" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-db:/var/lib/mysql
+    networks:
+      - l_net
+
+  rabbitmq:
+    build: rabbitMQ/.
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "check_running" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "61613:61613"
+    volumes:
+      - rabbit-conf:/var/lib/rabbitmq/
+      - rabbit-log:/var/log/rabbitmq/
+    networks:
+      - l_net
+
+  mongo:
+    image: mongo:6.0.2
+    container_name: mongo-container
+    healthcheck:
+      test: [ "CMD-SHELL", "mongo --quiet --eval \"db.adminCommand('ping')\"" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-db:/var/lib/mongo
+    networks:
+      - l_net
+
+  #  prometheus:
+  #    container_name: prometheus
+  #    image: 'prom/prometheus:v2.14.0'
+  #    ports:
+  #      - '9090:9090'
+  #    command: '--config.file=/etc/prometheus/config.yml'
+  #    volumes:
+  #      - './prometheus/prometheus.yml:/etc/prometheus/config.yml'
+  #    networks:
+  #      - l_net
+
+  #  grafana:
+  #    container_name: grafana
+  #    image: 'grafana/grafana:6.5.0'
+  #    restart: "no"
+  #    volumes:
+  #      - /grafana/provisioning/dashboards/local.yml:/conf/provisioning/dashboards/sample.yml
+  #      - /grafana/dashboards/:/var/lib/grafana/dashboards/
+  #    ports:
+  #      - '3001:3000'
+  #    networks:
+  #      - l_net
+  #
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+#    environment:
+#      - xpack.security.enabled=false
+#      - "discovery.type=single-node"
+#    networks:
+#      - l_net
+#    ports:
+#      - "9200:9200"
+#  logstash:
+#    image: docker.elastic.co/logstash/logstash:7.11.0
+#    volumes:
+#      - ./logstash/config:/usr/share/logstash/pipeline
+#    ports:
+#      - "5044:5044"
+#    depends_on:
+#      - elasticsearch
+#    networks:
+#      - l_net
+#
+#  kibana:
+#    container_name: kb-container
+#    image: docker.elastic.co/kibana/kibana:7.11.0
+#    environment:
+#      - ELASTICSEARCH_HOSTS=http://es-container:9200
+#    networks:
+#      - l_net
+#    depends_on:
+#      - elasticsearch
+#    ports:
+#      - "5601:5601"
+
+  posteio:
+    image: analogic/poste.io:latest
+    container_name: poste.io
+    hostname: crcl.com
+    restart: always
+    ports:
+      - '25:25'     #  SMTPS - mostly processing incoming mails
+      - '465:465'   #  SMTPS - mostly processing incoming mails
+      - '81:80'     #  HTTP - redirect to https (see options) and authentication for Let's encrypt service
+      - '110:110'   #  POP3 - standard protocol for accessing mailbox, STARTTLS is required before client auth
+      - '143:143'   #  IMAP - standard protocol for accessing mailbox, STARTTLS is required before client auth
+      - '8443:443'  #  HTTPS - access to administration or webmail client
+      - '587:587'   #  MSA - SMTP port used primarily for email clients after STARTTLS and auth
+      - '993:993'   #  IMAPS - alternative port for IMAP encrypted since connection
+      - '995:995'   #  POP3S - encrypted POP3 since connections
+    environment:
+      - HOSTNAME=mail.crcl.com
+      - HTTPS=OFF
+      - LETSENCRYPT_EMAIL=postmaster@crcl.com
+      - LETSENCRYPT_HOST=crcl.com
+      - VIRTUAL_HOST=mail.crcl.com
+    volumes:
+      - post-io:/data
+      - '/etc/localtime:/etc/localtime:ro'
+    labels:
+      - "traefik.leposte.backend=leposte"
+      - "traefik.leposte.frontend.rule=HostRegexp:crcl.com,{subdomain:[a-z]*}.crcl.com;PathPrefix:/.well-known/"
+      - "traefik.leposte.port=80"
+      - "traefik.leposte.protocol=http"
+      - "traefik.leposte.frontend.entryPoints=http"
+      - "traefik.webmail.backend=webmail"
+      - "traefik.webmail.frontend.rule=Host:webmail.crcl.com"
+      - "traefik.webmail.port=80"
+      - "traefik.webmail.frontend.headers.SSLRedirect=true"
+      - "traefik.admin.backend=posteio"
+      - "traefik.admin.frontend.rule=Host:posteio.crcl.com"
+      - "traefik.admin.frontend.redirect.regex=posteio.crcl.com/webmail"
+      - "traefik.admin.frontend.redirect.replacement=posteio.crcl.com/admin/"
+      - "traefik.admin.port=80"
+      - "traefik.admin.frontend.headers.SSLRedirect=true"
+
+  neo4j:
+    image: neo4j
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j-db:/data
+
+networks:
+  l_net:
+    driver: bridge
+
+volumes:
+  post-io:
+  mysql-db:
+  postgres-db:
+  cassandra-db:
+  mongo-db:
+  minio:
+  elasticsearch-db:
+  rabbit-log:
+  rabbit-conf:
+  nodemodules:
+  neo4j-db:
