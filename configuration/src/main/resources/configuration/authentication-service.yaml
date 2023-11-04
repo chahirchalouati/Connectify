@@ -130,7 +130,7 @@ security:
       grantTypes:
         - authorization_code
         - client_credentials
-      logoutUris: ["http://127.0.0.1:4000"]
+      logoutUris: [ "http://127.0.0.1:4000" ]
     processor-service:
       refresh-token-access-time-to-leave: 8000
       token-access-time-to-leave: 8000
