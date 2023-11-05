@@ -10,8 +10,18 @@
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
-        <module>configuration</module>
+        <module>post</module>
+        <module>comment</module>
+        <module>tag</module>
+        <module>reply</module>
+        <module>story</module>
+        <module>marketplace</module>
+        <module>date</module>
         <module>gateway</module>
+        <module>configuration</module>
         <module>iam</module>
+        <module>storage</module>
+        <module>notification</module>
+        <module>audit</module>
     </modules>
 </project>

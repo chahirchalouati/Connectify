@@ -36,19 +36,18 @@ services:
       - mysql-db:/var/lib/mysql
     networks:
       - l_net
+
   zipkin:
-    image: ghcr.io/openzipkin/zipkin-slim
-    container_name: zipkin
-    # Environment settings are defined here https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md#environment-variables
+    image: openzipkin/zipkin-mysql
     environment:
-      - STORAGE_TYPE=mem
+      - STORAGE_TYPE=mysql
       - MYSQL_HOST=mysql-db
-      # Uncomment to enable self-tracing
-      # - SELF_TRACING_ENABLED=true
-      # Uncomment to increase heap size
-      # - JAVA_OPTS=-Xms128m -Xmx128m -XX:+ExitOnOutOfMemoryError
+      - MYSQL_USER=root
+      - MYSQL_PASS=root
     ports:
       - "9411:9411"
+    networks:
+      - l_net
 
   rabbitmq:
     build: rabbitMQ/.
