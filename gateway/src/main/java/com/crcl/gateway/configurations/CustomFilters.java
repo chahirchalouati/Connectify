@@ -72,10 +72,12 @@ public class CustomFilters {
     public LinkedMultiValueMap<String, String> buildFormValues(OAuth2ClientProperties oAuth2ClientProperties) {
         Assert.notNull(oAuth2ClientProperties.getClientId(), "client_id can't be null");
         Assert.notNull(oAuth2ClientProperties.getClientSecret(), "secret can't be null");
+
         LinkedMultiValueMap<String, String> formValues = new LinkedMultiValueMap<>();
         formValues.add(GRANT_TYPE, CLIENT_CREDENTIALS);
         formValues.add(CLIENT_ID, oAuth2ClientProperties.getClientId());
         formValues.add(CLIENT_SECRET, oAuth2ClientProperties.getClientSecret());
+
         return formValues;
     }
 }

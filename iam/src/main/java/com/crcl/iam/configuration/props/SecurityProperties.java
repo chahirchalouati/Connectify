@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
-@ConfigurationProperties(prefix = "security", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "security")
 public class SecurityProperties {
     private String issuer;
     private String clientIp;

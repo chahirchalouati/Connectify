@@ -42,7 +42,7 @@ public class IdpController {
         if (errors.hasErrors()) {
             return "redirect:/register";
         }
-        UserDto save = userService.save(request);
+        userService.save(request);
         return "redirect:/login";
     }
 
