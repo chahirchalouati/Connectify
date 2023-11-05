@@ -1,13 +1,10 @@
 spring:
   application:
-    name: proxy-service
+    name: gateway-service
   cloud:
     config:
       uri: http://localhost:8888
-  main:
-    web-application-type: reactive
-logging:
-  level:
-    org:
-      springframework:
-        web: INFO
+    openfeign:
+      circuitbreaker:
+        alphanumeric-ids:
+          enabled: true
