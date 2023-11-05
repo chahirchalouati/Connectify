@@ -23,5 +23,6 @@
         <module>storage</module>
         <module>notification</module>
         <module>audit</module>
+        <module>profile</module>
     </modules>
 </project>
