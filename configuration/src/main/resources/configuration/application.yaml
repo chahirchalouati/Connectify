@@ -174,7 +174,7 @@ web-socket:
   relayPort: 61613
   clientLogin: guest
   clientPasscode: guest
-client: &common-client
+client:
   authentication:
     url: http://proxy-service:9999/authentication
     name: authentication
@@ -254,7 +254,7 @@ client: &common-client
     url: http://tag:8011/tag
     name: srvTag
 
-authorization: &common-authorization
+authorization:
   authorizationUrl: http://proxy-service:9999/authentication
   tokenUrl: http://proxy-service:9999/authentication/oauth2/token
 
@@ -277,5 +277,86 @@ web-socket:
   relayPort: 61613
   clientLogin: guest
   clientPasscode: guest
-client: *common-client
-authorization: *common-authorization
+client:
+  authentication:
+    url: http://proxy-service:9999/authentication
+    name: authentication
+  srvAuthentication:
+    url: http://proxy-service:9999/authentication
+    name: srvAuthentication
+  audit:
+    url: http://audit:8000/audit
+    name: audit
+  srvAudit:
+    url: http://audit:8000/audit
+    name: srvAudit
+  comment:
+    url: http://comment:8001/comment
+    name: comment
+  srvComment:
+    url: http://comment:8001/comment
+    name: srvComment
+  friendship:
+    url: http://friendship:8002/friendship
+    name: friendship
+  srvFriendship:
+    url: http://friendship:8002/friendship
+    name: srvFriendship
+  date:
+    url: http://date:8003/date
+    name: date
+  srvDate:
+    url: http://date:8003/date
+    name: srvDate
+  marketplace:
+    url: http://marketplace:8004/marketplace
+    name: marketplace
+  srvMarketplace:
+    url: http://marketplace:8004/marketplace
+    name: srvMarketplace
+  notification:
+    url: http://notification:8005/notification
+    name: notification
+  srvNotification:
+    url: http://notification:8005/notification
+    name: srvNotification
+  post:
+    url: http://post:8006/post
+    name: post
+  srvPost:
+    url: http://post:8006/post
+    name: srvPost
+  profile:
+    url: http://profile:8007/profile
+    name: profile
+  srvProfile:
+    url: http://profile:8007/profile
+    name: srvProfile
+  reply:
+    url: http://reply:8008/reply
+    name: reply
+  srvReply:
+    url: http://reply:8008/reply
+    name: srvReply
+  storage:
+    url: http://storage:8009/storage
+    name: storage
+  srvStorage:
+    url: http://storage:8009/storage
+    name: srvStorage
+  story:
+    url: http://story:8010/story
+    name: story
+  srvStory:
+    url: http://story:8010/story
+    name: srvStory
+  tag:
+    url: http://tag:8011/tag
+    name: tag
+  srvTag:
+    url: http://tag:8011/tag
+    name: srvTag
+
+authorization:
+  authorizationUrl: http://proxy-service:9999/authentication
+  tokenUrl: http://proxy-service:9999/authentication/oauth2/token
