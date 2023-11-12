@@ -42,138 +42,138 @@ security:
         - write.audit
       grantTypes:
         - client_credentials
-      comment:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: comment
-        uris:
-          - http://localhost:8001
-        scopes:
-          - openid
-          - read.comment
-          - write.comment
-        grantTypes:
-          - client_credentials
-      friendship:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: friendship
-        uris:
-          - http://localhost:8002
-        scopes:
-          - openid
-          - read.friendship
-          - write.friendship
-        grantTypes:
-          - client_credentials
-      date:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: date
-        uris:
-          - http://localhost:8003
-        scopes:
-          - openid
-          - read.date
-          - write.date
-        grantTypes:
-          - client_credentials
-      marketplace:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: marketplace
-        uris:
-          - http://localhost:8004
-        scopes:
-          - openid
-          - read.marketplace
-          - write.marketplace
-        grantTypes:
-          - client_credentials
-      notification:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: notification
-        uris:
-          - http://localhost:8005
-        scopes:
-          - openid
-          - read.notification
-          - write.notification
-        grantTypes:
-          - client_credentials
-      post:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: post
-        uris:
-          - http://localhost:8006
-        scopes:
-          - openid
-          - read.post
-          - write.post
-        grantTypes:
-          - client_credentials
-      profile:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: profile
-        uris:
-          - http://localhost:8007
-        scopes:
-          - openid
-          - read.profile
-          - write.profile
-        grantTypes:
-          - client_credentials
-      reply:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: reply
-        uris:
-          - http://localhost:8008
-        scopes:
-          - openid
-          - read.reply
-          - write.reply
-        grantTypes:
-          - client_credentials
-      storage:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: storage
-        uris:
-          - http://localhost:8009
-        scopes:
-          - openid
-          - read.storage
-          - write.storage
-        grantTypes:
-          - client_credentials
-      story:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: story
-        uris:
-          - http://localhost:8010
-        scopes:
-          - openid
-          - read.story
-          - write.story
-        grantTypes:
-          - client_credentials
-      tag:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: tag
-        uris:
-          - http://localhost:8011
-        scopes:
-          - openid
-          - read.tag
-          - write.tag
-        grantTypes:
-          - client_credentials
+    comment:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: comment
+      uris:
+        - http://localhost:8001
+      scopes:
+        - openid
+        - read.comment
+        - write.comment
+      grantTypes:
+        - client_credentials
+    friendship:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: friendship
+      uris:
+        - http://localhost:8002
+      scopes:
+        - openid
+        - read.friendship
+        - write.friendship
+      grantTypes:
+        - client_credentials
+    date:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: date
+      uris:
+        - http://localhost:8003
+      scopes:
+        - openid
+        - read.date
+        - write.date
+      grantTypes:
+        - client_credentials
+    marketplace:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: marketplace
+      uris:
+        - http://localhost:8004
+      scopes:
+        - openid
+        - read.marketplace
+        - write.marketplace
+      grantTypes:
+        - client_credentials
+    notification:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: notification
+      uris:
+        - http://localhost:8005
+      scopes:
+        - openid
+        - read.notification
+        - write.notification
+      grantTypes:
+        - client_credentials
+    post:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: post
+      uris:
+        - http://localhost:8006
+      scopes:
+        - openid
+        - read.post
+        - write.post
+      grantTypes:
+        - client_credentials
+    profile:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: profile
+      uris:
+        - http://localhost:8007
+      scopes:
+        - openid
+        - read.profile
+        - write.profile
+      grantTypes:
+        - client_credentials
+    reply:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: reply
+      uris:
+        - http://localhost:8008
+      scopes:
+        - openid
+        - read.reply
+        - write.reply
+      grantTypes:
+        - client_credentials
+    storage:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: storage
+      uris:
+        - http://localhost:8009
+      scopes:
+        - openid
+        - read.storage
+        - write.storage
+      grantTypes:
+        - client_credentials
+    story:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: story
+      uris:
+        - http://localhost:8010
+      scopes:
+        - openid
+        - read.story
+        - write.story
+      grantTypes:
+        - client_credentials
+    tag:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: tag
+      uris:
+        - http://localhost:8011
+      scopes:
+        - openid
+        - read.tag
+        - write.tag
+      grantTypes:
+        - client_credentials
 
 minio:
   access-key: myaccesskey
@@ -215,7 +215,7 @@ security:
   loginPage: /authentication/login
   certificationBucket: cert
   failureForwardUrl: /authentication/login?error=true
-  registrations: &registrations
+  registrations:
     audit:
       refresh-token-access-time-to-leave: 8000
       token-access-time-to-leave: 8000
@@ -228,138 +228,138 @@ security:
         - write.audit
       grantTypes:
         - client_credentials
-      comment:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: comment
-        uris:
-          - http://comment:8001
-        scopes:
-          - openid
-          - read.comment
-          - write.comment
-        grantTypes:
-          - client_credentials
-      friendship:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: friendship
-        uris:
-          - http://friendship:8002
-        scopes:
-          - openid
-          - read.friendship
-          - write.friendship
-        grantTypes:
-          - client_credentials
-      date:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: date
-        uris:
-          - http://date:8003
-        scopes:
-          - openid
-          - read.date
-          - write.date
-        grantTypes:
-          - client_credentials
-      marketplace:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: marketplace
-        uris:
-          - http://marketplace:8004
-        scopes:
-          - openid
-          - read.marketplace
-          - write.marketplace
-        grantTypes:
-          - client_credentials
-      notification:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: notification
-        uris:
-          - http://notification:8005
-        scopes:
-          - openid
-          - read.notification
-          - write.notification
-        grantTypes:
-          - client_credentials
-      post:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: post
-        uris:
-          - http://post:8006
-        scopes:
-          - openid
-          - read.post
-          - write.post
-        grantTypes:
-          - client_credentials
-      profile:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: profile
-        uris:
-          - http://profile:8007
-        scopes:
-          - openid
-          - read.profile
-          - write.profile
-        grantTypes:
-          - client_credentials
-      reply:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: reply
-        uris:
-          - http://reply:8008
-        scopes:
-          - openid
-          - read.reply
-          - write.reply
-        grantTypes:
-          - client_credentials
-      storage:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: storage
-        uris:
-          - http://storage:8009
-        scopes:
-          - openid
-          - read.storage
-          - write.storage
-        grantTypes:
-          - client_credentials
-      story:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: story
-        uris:
-          - http://story:8010
-        scopes:
-          - openid
-          - read.story
-          - write.story
-        grantTypes:
-          - client_credentials
-      tag:
-        refresh-token-access-time-to-leave: 8000
-        token-access-time-to-leave: 8000
-        id: tag
-        uris:
-          - http://tag:8011
-        scopes:
-          - openid
-          - read.tag
-          - write.tag
-        grantTypes:
-          - client_credentials
+    comment:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: comment
+      uris:
+        - http://comment:8001
+      scopes:
+        - openid
+        - read.comment
+        - write.comment
+      grantTypes:
+        - client_credentials
+    friendship:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: friendship
+      uris:
+        - http://friendship:8002
+      scopes:
+        - openid
+        - read.friendship
+        - write.friendship
+      grantTypes:
+        - client_credentials
+    date:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: date
+      uris:
+        - http://date:8003
+      scopes:
+        - openid
+        - read.date
+        - write.date
+      grantTypes:
+        - client_credentials
+    marketplace:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: marketplace
+      uris:
+        - http://marketplace:8004
+      scopes:
+        - openid
+        - read.marketplace
+        - write.marketplace
+      grantTypes:
+        - client_credentials
+    notification:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: notification
+      uris:
+        - http://notification:8005
+      scopes:
+        - openid
+        - read.notification
+        - write.notification
+      grantTypes:
+        - client_credentials
+    post:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: post
+      uris:
+        - http://post:8006
+      scopes:
+        - openid
+        - read.post
+        - write.post
+      grantTypes:
+        - client_credentials
+    profile:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: profile
+      uris:
+        - http://profile:8007
+      scopes:
+        - openid
+        - read.profile
+        - write.profile
+      grantTypes:
+        - client_credentials
+    reply:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: reply
+      uris:
+        - http://reply:8008
+      scopes:
+        - openid
+        - read.reply
+        - write.reply
+      grantTypes:
+        - client_credentials
+    storage:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: storage
+      uris:
+        - http://storage:8009
+      scopes:
+        - openid
+        - read.storage
+        - write.storage
+      grantTypes:
+        - client_credentials
+    story:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: story
+      uris:
+        - http://story:8010
+      scopes:
+        - openid
+        - read.story
+        - write.story
+      grantTypes:
+        - client_credentials
+    tag:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: tag
+      uris:
+        - http://tag:8011
+      scopes:
+        - openid
+        - read.tag
+        - write.tag
+      grantTypes:
+        - client_credentials
 minio:
   access-key: myaccesskey
   secret-key: mysecretkey
@@ -400,7 +400,151 @@ security:
   loginPage: /authentication/login
   certificationBucket: cert
   failureForwardUrl: /authentication/login?error=true
-  registrations: *registrations
+  registrations:
+    audit:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: audit
+      uris:
+        - http://audit:8000
+      scopes:
+        - openid
+        - read.audit
+        - write.audit
+      grantTypes:
+        - client_credentials
+    comment:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: comment
+      uris:
+        - http://comment:8001
+      scopes:
+        - openid
+        - read.comment
+        - write.comment
+      grantTypes:
+        - client_credentials
+    friendship:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: friendship
+      uris:
+        - http://friendship:8002
+      scopes:
+        - openid
+        - read.friendship
+        - write.friendship
+      grantTypes:
+        - client_credentials
+    date:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: date
+      uris:
+        - http://date:8003
+      scopes:
+        - openid
+        - read.date
+        - write.date
+      grantTypes:
+        - client_credentials
+    marketplace:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: marketplace
+      uris:
+        - http://marketplace:8004
+      scopes:
+        - openid
+        - read.marketplace
+        - write.marketplace
+      grantTypes:
+        - client_credentials
+    notification:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: notification
+      uris:
+        - http://notification:8005
+      scopes:
+        - openid
+        - read.notification
+        - write.notification
+      grantTypes:
+        - client_credentials
+    post:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: post
+      uris:
+        - http://post:8006
+      scopes:
+        - openid
+        - read.post
+        - write.post
+      grantTypes:
+        - client_credentials
+    profile:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: profile
+      uris:
+        - http://profile:8007
+      scopes:
+        - openid
+        - read.profile
+        - write.profile
+      grantTypes:
+        - client_credentials
+    reply:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: reply
+      uris:
+        - http://reply:8008
+      scopes:
+        - openid
+        - read.reply
+        - write.reply
+      grantTypes:
+        - client_credentials
+    storage:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: storage
+      uris:
+        - http://storage:8009
+      scopes:
+        - openid
+        - read.storage
+        - write.storage
+      grantTypes:
+        - client_credentials
+    story:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: story
+      uris:
+        - http://story:8010
+      scopes:
+        - openid
+        - read.story
+        - write.story
+      grantTypes:
+        - client_credentials
+    tag:
+      refresh-token-access-time-to-leave: 8000
+      token-access-time-to-leave: 8000
+      id: tag
+      uris:
+        - http://tag:8011
+      scopes:
+        - openid
+        - read.tag
+        - write.tag
+      grantTypes:
+        - client_credentials
 minio:
   access-key: myaccesskey
   url: http://minio:9000
