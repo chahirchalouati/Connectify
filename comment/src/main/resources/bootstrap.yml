@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: comment
+  cloud:
+    config:
+      uri: http://localhost:8888
+    openfeign:
+      circuitbreaker:
+        alphanumeric-ids:
+          enabled: true
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  level:
+    org.springframework.security: DEBUG

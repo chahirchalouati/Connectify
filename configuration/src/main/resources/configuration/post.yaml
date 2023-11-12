@@ -1,9 +1,9 @@
 server:
-  port: 8009
+  port: 8006
 # openApi documentation
 api:
-  title: post Service
-  description: API for post services
+  title: Post Service
+  description: API for Post Service services
 ---
 spring:
   config:
@@ -24,19 +24,20 @@ spring:
       client:
         registration:
           post-service-oidc:
-            provider: crcl.com
+            provider: crcl-com
             client-id: post-service
             client-secret: secret
             authorization-grant-type: client_credentials
             scope: openid
           post-service:
-            provider: crcl.com
+            provider: crcl-com
             client-id: post-service
             client-secret: secret
             authorization-grant-type: client_credentials
         provider:
-          spring:
+          crcl-com:
             issuer-uri: http://auth-server:9000
+            jwk-set-uri: http://auth-server:9000/oauth2/jwks
 ---
 spring:
   config:
@@ -57,7 +58,7 @@ spring:
       client:
         registration:
           post-service-oidc:
-            provider: crcl.com
+            provider: crcl-com
             client-id: post-service
             client-secret: secret
             authorization-grant-type: client_credentials
@@ -68,8 +69,9 @@ spring:
             client-secret: secret
             authorization-grant-type: client_credentials
         provider:
-          spring:
+          crcl-com:
             issuer-uri: http://authentication-service:9000
+            jwk-set-uri: http://authentication-service:9000/oauth2/jwks
 ---
 spring:
   config:
@@ -90,7 +92,7 @@ spring:
       client:
         registration:
           post-service-oidc:
-            provider: crcl.com
+            provider: crcl-com
             client-id: post-service
             client-secret: secret
             authorization-grant-type: client_credentials
@@ -101,5 +103,6 @@ spring:
             client-secret: secret
             authorization-grant-type: client_credentials
         provider:
-          spring:
+          crcl-com:
             issuer-uri: http://authentication-service:9000
+            jwk-set-uri: http://authentication-service:9000/oauth2/jwks

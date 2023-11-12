@@ -6,7 +6,7 @@ import com.crcl.iam.mappers.ClientMapper;
 import com.crcl.iam.repository.MongoClientRepository;
 import com.crcl.iam.repository.MongoRegisteredClientRepository;
 import com.crcl.iam.service.impl.ClientSettingsEnhancer;
-import com.crcl.core.configuration.SwaggerConfiguration;
+import com.crcl.core.configuration.CoreSwaggerConfiguration;
 import com.crcl.core.configuration.properties.ApiProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -38,7 +38,7 @@ import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-@Import({ApiProperties.class, SwaggerConfiguration.class}) // TODO: 16/09/23 move to main class
+@Import({ApiProperties.class, CoreSwaggerConfiguration.class}) // TODO: 16/09/23 move to main class
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 public class AuthorizationServerConfiguration {

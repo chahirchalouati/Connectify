@@ -1,9 +1,9 @@
 server:
-  port: 80014
+  port: 8011
 # openApi documentation
 api:
-  title: tag Service
-  description: API for tag services
+  title: Tag Service
+  description: API for Tag Service services
 ---
 spring:
   config:
@@ -24,19 +24,20 @@ spring:
       client:
         registration:
           tag-service-oidc:
-            provider: crcl.com
+            provider: crcl-com
             client-id: tag-service
             client-secret: secret
             authorization-grant-type: client_credentials
             scope: openid
           tag-service:
-            provider: crcl.com
+            provider: crcl-com
             client-id: tag-service
             client-secret: secret
             authorization-grant-type: client_credentials
         provider:
-          spring:
+          crcl-com:
             issuer-uri: http://auth-server:9000
+            jwk-set-uri: http://auth-server:9000/oauth2/jwks
 ---
 spring:
   config:
@@ -57,7 +58,7 @@ spring:
       client:
         registration:
           tag-service-oidc:
-            provider: crcl.com
+            provider: crcl-com
             client-id: tag-service
             client-secret: secret
             authorization-grant-type: client_credentials
@@ -68,8 +69,9 @@ spring:
             client-secret: secret
             authorization-grant-type: client_credentials
         provider:
-          spring:
+          crcl-com:
             issuer-uri: http://authentication-service:9000
+            jwk-set-uri: http://authentication-service:9000/oauth2/jwks
 ---
 spring:
   config:
@@ -90,7 +92,7 @@ spring:
       client:
         registration:
           tag-service-oidc:
-            provider: crcl.com
+            provider: crcl-com
             client-id: tag-service
             client-secret: secret
             authorization-grant-type: client_credentials
@@ -101,5 +103,6 @@ spring:
             client-secret: secret
             authorization-grant-type: client_credentials
         provider:
-          spring:
+          crcl-com:
             issuer-uri: http://authentication-service:9000
+            jwk-set-uri: http://authentication-service:9000/oauth2/jwks

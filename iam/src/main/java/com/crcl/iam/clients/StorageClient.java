@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import reactivefeign.spring.config.ReactiveFeignClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 
-@FeignClient(name = "${client.storage.name}",
+@ReactiveFeignClient(name = "${client.storage.name}",
         url = "${client.storage.url}",
         configuration = {
                 OAuthFeignConfig.class,
@@ -24,11 +27,11 @@ import java.util.List;
 public interface StorageClient {
 
     @GetMapping("/files/{folder}/{fileName}")
-    ByteArrayResource getObject(@PathVariable("fileName") String fileName, @PathVariable("folder") String folder);
+    Mono<ByteArrayResource> getObject(@PathVariable("fileName") String fileName, @PathVariable("folder") String folder);
 
     @PostMapping(value = "/files", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    FileUploadResult save(@RequestPart("file") MultipartFile multipartFile);
+    Mono<FileUploadResult> save(@RequestPart("file") MultipartFile multipartFile);
 
     @PostMapping(value = "/files/all", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    List<FileUploadResult> saveAll(@RequestPart("files") List<MultipartFile> multipartFiles);
+    Flux<FileUploadResult> saveAll(@RequestPart("files") List<MultipartFile> multipartFiles);
 }

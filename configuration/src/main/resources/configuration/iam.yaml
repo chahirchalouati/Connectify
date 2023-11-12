@@ -22,7 +22,7 @@ spring:
           issuer-uri: http://auth-server:9000
           jwk-set-uri: http://auth-server:9000/oauth2/jwks
 mongock:
-  change-logs-scan-package: com.crcl.authentication.migration
+  change-logs-scan-package: com.crcl.iam.migration
 security:
   clientIp: 127.0.0.1
   issuer: http://auth-server:9000
@@ -30,162 +30,150 @@ security:
   certificationBucket: cert
   failureForwardUrl: /authentication/login?error=true
   registrations:
-    notification-service:
+    audit:
       refresh-token-access-time-to-leave: 8000
       token-access-time-to-leave: 8000
-      id: notification-service
+      id: audit
       uris:
-        - http://127.0.0.1:7008
+        - http://localhost:8000
       scopes:
         - openid
-        - service
+        - read.audit
+        - write.audit
       grantTypes:
         - client_credentials
-    post-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: post-service
-      uris:
-        - http://127.0.0.1:7005
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    configuration-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: configuration-service
-      uris:
-        - http://127.0.0.1:8888
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    comment-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: comment-service
-      uris:
-        - http://127.0.0.1:7001
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    authentication-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: authentication-service
-      uris:
-        - http://127.0.0.1:9000
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    audit-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: audit-service
-      uris:
-        - http://127.0.0.1:7003
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    profile-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: profile-service
-      uris:
-        - http://127.0.0.1:7009
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    storage-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: storage-service
-      uris:
-        - http://127.0.0.1:7010
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    ui-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: ui-service
-      uris:
-        - http://127.0.0.1:4200
-        - https://oauth.pstmn.io/v1/callback
-      scopes:
-        - openid
-      grantTypes:
-        - authorization_code
-        - client_credentials
-      logoutUris: ["http://127.0.0.1:4000"]
-    processor-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: processor-service
-      uris:
-        - http://127.0.0.1:7012
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    user-info-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: user-info-service
-      uris:
-        - http://127.0.0.1:7011
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    utilities-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: utilities-service
-      uris:
-        - http://127.0.0.1:7004
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    friendship-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: friendship-service
-      uris:
-        - http://127.0.0.1:7006
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    message-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: message-service
-      uris:
-        - http://127.0.0.1:7007
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
+      comment:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: comment
+        uris:
+          - http://localhost:8001
+        scopes:
+          - openid
+          - read.comment
+          - write.comment
+        grantTypes:
+          - client_credentials
+      friendship:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: friendship
+        uris:
+          - http://localhost:8002
+        scopes:
+          - openid
+          - read.friendship
+          - write.friendship
+        grantTypes:
+          - client_credentials
+      date:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: date
+        uris:
+          - http://localhost:8003
+        scopes:
+          - openid
+          - read.date
+          - write.date
+        grantTypes:
+          - client_credentials
+      marketplace:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: marketplace
+        uris:
+          - http://localhost:8004
+        scopes:
+          - openid
+          - read.marketplace
+          - write.marketplace
+        grantTypes:
+          - client_credentials
+      notification:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: notification
+        uris:
+          - http://localhost:8005
+        scopes:
+          - openid
+          - read.notification
+          - write.notification
+        grantTypes:
+          - client_credentials
+      post:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: post
+        uris:
+          - http://localhost:8006
+        scopes:
+          - openid
+          - read.post
+          - write.post
+        grantTypes:
+          - client_credentials
+      profile:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: profile
+        uris:
+          - http://localhost:8007
+        scopes:
+          - openid
+          - read.profile
+          - write.profile
+        grantTypes:
+          - client_credentials
+      reply:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: reply
+        uris:
+          - http://localhost:8008
+        scopes:
+          - openid
+          - read.reply
+          - write.reply
+        grantTypes:
+          - client_credentials
+      storage:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: storage
+        uris:
+          - http://localhost:8009
+        scopes:
+          - openid
+          - read.storage
+          - write.storage
+        grantTypes:
+          - client_credentials
+      story:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: story
+        uris:
+          - http://localhost:8010
+        scopes:
+          - openid
+          - read.story
+          - write.story
+        grantTypes:
+          - client_credentials
+      tag:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: tag
+        uris:
+          - http://localhost:8011
+        scopes:
+          - openid
+          - read.tag
+          - write.tag
+        grantTypes:
+          - client_credentials
 
 minio:
   access-key: myaccesskey
@@ -220,169 +208,158 @@ spring:
           issuer-uri: http://authentication-service:9000
           jwk-set-uri: http://authentication-service:9000/oauth2/jwks
 mongock:
-  change-logs-scan-package: com.crcl.authentication.migration
+  change-logs-scan-package: com.crcl.iam.migration
 security:
   clientIp: social-service
   issuer: http://authentication-service:9000
   loginPage: /authentication/login
   certificationBucket: cert
   failureForwardUrl: /authentication/login?error=true
-  registrations:
-    notification-service:
+  registrations: &registrations
+    audit:
       refresh-token-access-time-to-leave: 8000
       token-access-time-to-leave: 8000
-      id: notification-service
+      id: audit
       uris:
-        - http://notification-service:7008
+        - http://audit:8000
       scopes:
         - openid
-        - service
+        - read.audit
+        - write.audit
       grantTypes:
         - client_credentials
-    post-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: post-service
-      uris:
-        - http://post-service:7005
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    configuration-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: configuration-service
-      uris:
-        - http://configuration-service:8888
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    comment-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: comment-service
-      uris:
-        - http://comment-service:7001
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    authentication-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: authentication-service
-      uris:
-        - http://authentication-service:9000
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    audit-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: audit-service
-      uris:
-        - http://audit-service:7003
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    profile-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: profile-service
-      uris:
-        - http://profile-service:7009
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    storage-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: storage-service
-      uris:
-        - http://storage-service:7010
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    ui-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: ui-service
-      uris:
-        - http://ui-service:4200
-        - http://127.0.0.1:4200
-      scopes:
-        - openid
-      grantTypes:
-        - authorization_code
-        - client_credentials
-    processor-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: processor-service
-      uris:
-        - http://processor-service:7012
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    user-info-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: user-info-service
-      uris:
-        - http://user-info-service:7011
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    utilities-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: utilities-service
-      uris:
-        - http://utilities-service:7004
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    friendship-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: friendship-service
-      uris:
-        - http://friendship-service:7006
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    message-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: message-service
-      uris:
-        - http://message-service:7007
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
+      comment:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: comment
+        uris:
+          - http://comment:8001
+        scopes:
+          - openid
+          - read.comment
+          - write.comment
+        grantTypes:
+          - client_credentials
+      friendship:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: friendship
+        uris:
+          - http://friendship:8002
+        scopes:
+          - openid
+          - read.friendship
+          - write.friendship
+        grantTypes:
+          - client_credentials
+      date:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: date
+        uris:
+          - http://date:8003
+        scopes:
+          - openid
+          - read.date
+          - write.date
+        grantTypes:
+          - client_credentials
+      marketplace:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: marketplace
+        uris:
+          - http://marketplace:8004
+        scopes:
+          - openid
+          - read.marketplace
+          - write.marketplace
+        grantTypes:
+          - client_credentials
+      notification:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: notification
+        uris:
+          - http://notification:8005
+        scopes:
+          - openid
+          - read.notification
+          - write.notification
+        grantTypes:
+          - client_credentials
+      post:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: post
+        uris:
+          - http://post:8006
+        scopes:
+          - openid
+          - read.post
+          - write.post
+        grantTypes:
+          - client_credentials
+      profile:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: profile
+        uris:
+          - http://profile:8007
+        scopes:
+          - openid
+          - read.profile
+          - write.profile
+        grantTypes:
+          - client_credentials
+      reply:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: reply
+        uris:
+          - http://reply:8008
+        scopes:
+          - openid
+          - read.reply
+          - write.reply
+        grantTypes:
+          - client_credentials
+      storage:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: storage
+        uris:
+          - http://storage:8009
+        scopes:
+          - openid
+          - read.storage
+          - write.storage
+        grantTypes:
+          - client_credentials
+      story:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: story
+        uris:
+          - http://story:8010
+        scopes:
+          - openid
+          - read.story
+          - write.story
+        grantTypes:
+          - client_credentials
+      tag:
+        refresh-token-access-time-to-leave: 8000
+        token-access-time-to-leave: 8000
+        id: tag
+        uris:
+          - http://tag:8011
+        scopes:
+          - openid
+          - read.tag
+          - write.tag
+        grantTypes:
+          - client_credentials
 minio:
   access-key: myaccesskey
   secret-key: mysecretkey
@@ -416,169 +393,14 @@ spring:
           issuer-uri: http://authentication-service:9000
           jwk-set-uri: http://authentication-service:9000/oauth2/jwks
 mongock:
-  change-logs-scan-package: com.crcl.authentication.migration
+  change-logs-scan-package: com.crcl.iam.migration
 security:
   clientIp: 127.0.0.1
   issuer: http://authentication-service:9000
   loginPage: /authentication/login
   certificationBucket: cert
   failureForwardUrl: /authentication/login?error=true
-  registrations:
-    notification-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: notification-service
-      uris:
-        - http://notification-service:7008
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    post-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: post-service
-      uris:
-        - http://post-service:7005
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    configuration-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: configuration-service
-      uris:
-        - http://configuration-service:8888
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    comment-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: comment-service
-      uris:
-        - http://comment-service:7001
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    authentication-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: authentication-service
-      uris:
-        - http://authentication-service:9000
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    audit-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: audit-service
-      uris:
-        - http://audit-service:7003
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    profile-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: profile-service
-      uris:
-        - http://profile-service:7009
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    storage-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: storage-service
-      uris:
-        - http://storage-service:7010
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    ui-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: ui-service
-      uris:
-        - http://ui-service:4200
-        - http://127.0.0.1:4200
-      scopes:
-        - openid
-      grantTypes:
-        - authorization_code
-        - client_credentials
-    processor-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: processor-service
-      uris:
-        - http://processor-service:7012
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    user-info-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: user-info-service
-      uris:
-        - http://user-info-service:7011
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    utilities-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: utilities-service
-      uris:
-        - http://utilities-service:7004
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    friendship-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: friendship-service
-      uris:
-        - http://friendship-service:7006
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
-    message-service:
-      refresh-token-access-time-to-leave: 8000
-      token-access-time-to-leave: 8000
-      id: message-service
-      uris:
-        - http://message-service:7007
-      scopes:
-        - openid
-        - service
-      grantTypes:
-        - client_credentials
+  registrations: *registrations
 minio:
   access-key: myaccesskey
   url: http://minio:9000

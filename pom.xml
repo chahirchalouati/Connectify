@@ -24,5 +24,6 @@
         <module>notification</module>
         <module>audit</module>
         <module>profile</module>
+        <module>friendship</module>
     </modules>
 </project>

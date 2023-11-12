@@ -15,7 +15,7 @@ logging:
             filter: INFO
 spring:
   application:
-    name: configuration-service
+    name: configuration
 ---
 spring:
   config:

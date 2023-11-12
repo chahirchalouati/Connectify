@@ -1,0 +1,108 @@
+server:
+  port: 8002
+# openApi documentation
+api:
+  title: Friendship Service
+  description: API for Friendship Service services
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      database: dev_friendship
+      host: localhost
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://auth-server:9000
+          jwk-set-uri: http://auth-server:9000/oauth2/jwks
+      client:
+        registration:
+          friendship-service-oidc:
+            provider: crcl-com
+            client-id: friendship-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+          friendship-service:
+            provider: crcl-com
+            client-id: friendship-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+        provider:
+          crcl-com:
+            issuer-uri: http://auth-server:9000
+            jwk-set-uri: http://auth-server:9000/oauth2/jwks
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      database: docker_friendship
+      host: mongo
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://authentication-service:9000
+          jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+      client:
+        registration:
+          friendship-service-oidc:
+            provider: crcl-com
+            client-id: friendship-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+          friendship-service:
+            provider: crcl.com
+            client-id: friendship-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+        provider:
+          crcl-com:
+            issuer-uri: http://authentication-service:9000
+            jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      database: prod_friendship
+      host: mongo
+      port: 27017
+      authentication-database: admin
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://authentication-service:9000
+          jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+      client:
+        registration:
+          friendship-service-oidc:
+            provider: crcl-com
+            client-id: friendship-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+          friendship-service:
+            provider: crcl.com
+            client-id: friendship-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+        provider:
+          crcl-com:
+            issuer-uri: http://authentication-service:9000
+            jwk-set-uri: http://authentication-service:9000/oauth2/jwks

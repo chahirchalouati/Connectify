@@ -51,8 +51,11 @@ image-sizes:
       width: 1200
       height: 628
       name: "gramify_ad"
+
 ---
 spring:
+  main:
+    allow-bean-definition-overriding: true
   config:
     activate:
       on-profile: dev
@@ -75,54 +78,87 @@ client:
   srvAuthentication:
     url: http://localhost:9999/authentication
     name: srvAuthentication
-  storage:
-    url: http://localhost:9999/storage
-    name: storage
-  srvStorage:
-    url: http://localhost:9999/storage
-    name: srvStorage
-  profile:
-    url: http://localhost:9999/profile
-    name: profile
-  srvProfile:
-    url: http://localhost:9999/profile
-    name: srvProfile
-  post:
-    url: http://localhost:9999/post
-    name: post
-  srvPost:
-    url: http://localhost:9999/post
-    name: srvPost
+  audit:
+    url: http://localhost:8000/audit
+    name: audit
+  srvAudit:
+    url: http://localhost:8000/audit
+    name: srvAudit
   comment:
-    url: http://localhost:9999/comment
+    url: http://localhost:8001/comment
     name: comment
   srvComment:
-    url: http://localhost:9999/comment
+    url: http://localhost:8001/comment
     name: srvComment
-  srvUserInfo:
-    url: http://localhost:9999/user-info
-    name: srvUserInfo
-  srvUtilities:
-    url: http://localhost:9999/utilities
-    name: srvUtilities
   friendship:
-    url: http://localhost:9999/friendship
+    url: http://localhost:8002/friendship
     name: friendship
   srvFriendship:
-    url: http://localhost:9999/friendship
+    url: http://localhost:8002/friendship
     name: srvFriendship
-  message:
-    url: http://localhost:9999/message
-    name: message
-  srvMessage:
-    url: http://localhost:9999/message
-    name: srvMessage
+  date:
+    url: http://localhost:8003/date
+    name: date
+  srvDate:
+    url: http://localhost:8003/date
+    name: srvDate
+  marketplace:
+    url: http://localhost:8004/marketplace
+    name: marketplace
+  srvMarketplace:
+    url: http://localhost:8004/marketplace
+    name: srvMarketplace
+  notification:
+    url: http://localhost:8005/notification
+    name: notification
+  srvNotification:
+    url: http://localhost:8005/notification
+    name: srvNotification
+  post:
+    url: http://localhost:8006/post
+    name: post
+  srvPost:
+    url: http://localhost:8006/post
+    name: srvPost
+  profile:
+    url: http://localhost:8007/profile
+    name: profile
+  srvProfile:
+    url: http://localhost:8007/profile
+    name: srvProfile
+  reply:
+    url: http://localhost:8008/reply
+    name: reply
+  srvReply:
+    url: http://localhost:8008/reply
+    name: srvReply
+  storage:
+    url: http://localhost:8009/storage
+    name: storage
+  srvStorage:
+    url: http://localhost:8009/storage
+    name: srvStorage
+  story:
+    url: http://localhost:8010/story
+    name: story
+  srvStory:
+    url: http://localhost:8010/story
+    name: srvStory
+  tag:
+    url: http://localhost:8011/tag
+    name: tag
+  srvTag:
+    url: http://localhost:8011/tag
+    name: srvTag
+
 authorization:
   authorizationUrl: http://localhost:9999/authentication
   tokenUrl: http://localhost:9999/authentication/oauth2/token
 
 ---
 spring:
+  main:
+    allow-bean-definition-overriding: true
   config:
     activate:
       on-profile: docker
@@ -138,61 +174,94 @@ web-socket:
   relayPort: 61613
   clientLogin: guest
   clientPasscode: guest
-client:
+client: &common-client
   authentication:
     url: http://proxy-service:9999/authentication
     name: authentication
   srvAuthentication:
     url: http://proxy-service:9999/authentication
     name: srvAuthentication
-  storage:
-    url: http://proxy-service:9999/storage
-    name: storage
-  srvStorage:
-    url: http://proxy-service:9999/storage
-    name: srvStorage
-  profile:
-    url: http://proxy-service:9999/profile
-    name: profile
-  srvProfile:
-    url: http://proxy-service:9999/profile
-    name: srvProfile
-  post:
-    url: http://proxy-service:9999/post
-    name: post
-  srvPost:
-    url: http://proxy-service:9999/post
-    name: srvPost
+  audit:
+    url: http://audit:8000/audit
+    name: audit
+  srvAudit:
+    url: http://audit:8000/audit
+    name: srvAudit
   comment:
-    url: http://proxy-service:9999/comment
+    url: http://comment:8001/comment
     name: comment
   srvComment:
-    url: http://proxy-service:9999/comment
+    url: http://comment:8001/comment
     name: srvComment
-  srvUserInfo:
-    url: http://proxy-service:9999/user-info
-    name: srvUserInfo
-  srvUtilities:
-    url: http://proxy-servic:9999/utilities
-    name: srvUtilities
   friendship:
-    url: http://proxy-service:9999/friendship
+    url: http://friendship:8002/friendship
     name: friendship
   srvFriendship:
-    url: http://proxy-service:9999/friendship
+    url: http://friendship:8002/friendship
     name: srvFriendship
-  message:
-    url: http://proxy-service:9999/message
-    name: message
-  srvMessage:
-    url: http://proxy-service:9999/message
-    name: srvMessage
-authorization:
+  date:
+    url: http://date:8003/date
+    name: date
+  srvDate:
+    url: http://date:8003/date
+    name: srvDate
+  marketplace:
+    url: http://marketplace:8004/marketplace
+    name: marketplace
+  srvMarketplace:
+    url: http://marketplace:8004/marketplace
+    name: srvMarketplace
+  notification:
+    url: http://notification:8005/notification
+    name: notification
+  srvNotification:
+    url: http://notification:8005/notification
+    name: srvNotification
+  post:
+    url: http://post:8006/post
+    name: post
+  srvPost:
+    url: http://post:8006/post
+    name: srvPost
+  profile:
+    url: http://profile:8007/profile
+    name: profile
+  srvProfile:
+    url: http://profile:8007/profile
+    name: srvProfile
+  reply:
+    url: http://reply:8008/reply
+    name: reply
+  srvReply:
+    url: http://reply:8008/reply
+    name: srvReply
+  storage:
+    url: http://storage:8009/storage
+    name: storage
+  srvStorage:
+    url: http://storage:8009/storage
+    name: srvStorage
+  story:
+    url: http://story:8010/story
+    name: story
+  srvStory:
+    url: http://story:8010/story
+    name: srvStory
+  tag:
+    url: http://tag:8011/tag
+    name: tag
+  srvTag:
+    url: http://tag:8011/tag
+    name: srvTag
+
+authorization: &common-authorization
   authorizationUrl: http://proxy-service:9999/authentication
   tokenUrl: http://proxy-service:9999/authentication/oauth2/token
 
 ---
 spring:
+  main:
+    allow-bean-definition-overriding: true
   config:
     activate:
       on-profile: prod
@@ -208,52 +277,5 @@ web-socket:
   relayPort: 61613
   clientLogin: guest
   clientPasscode: guest
-client:
-  authentication:
-    url: http://proxy-service:9999/authentication
-    name: authentication
-  srvAuthentication:
-    url: http://proxy-service:9999/authentication
-    name: srvAuthentication
-  storage:
-    url: http://proxy-service:9999/storage
-    name: storage
-  srvStorage:
-    url: http://proxy-service:9999/storage
-    name: srvStorage
-  profile:
-    url: http://proxy-service:9999/profile
-    name: profile
-  srvProfile:
-    url: http://proxy-service:9999/profile
-    name: srvProfile
-  post:
-    url: http://proxy-service:9999/post
-    name: post
-  srvPost:
-    url: http://proxy-service:9999/post
-    name: srvPost
-  comment:
-    url: http://proxy-service:9999/comment
-    name: comment
-  srvComment:
-    url: http://proxy-service:9999/comment
-    name: srvComment
-  srvUserInfo:
-    url: http://proxy-service:9999/user-info
-    name: srvUserInfo
-  friendship:
-    url: http://proxy-service:9999/friendship
-    name: friendship
-  srvFriendship:
-    url: http://proxy-service:9999/friendship
-    name: srvFriendship
-  message:
-    url: http://proxy-service:9999/message
-    name: message
-  srvMessage:
-    url: http://proxy-service:9999/message
-    name: srvMessage
-authorization:
-  authorizationUrl: http://proxy-service:9999/authentication
-  tokenUrl: http://proxy-service:9999/authentication/oauth2/token
+client: *common-client
+authorization: *common-authorization

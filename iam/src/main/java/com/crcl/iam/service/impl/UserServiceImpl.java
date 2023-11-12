@@ -139,15 +139,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Set<UserDto> findByUserNames(Set<String> userNames) {
         List<User> users = this.userRepository.findByUsernameIn(userNames);
-        this.profileClient.findByUsernames(new ArrayList<>(userNames));
+        this.profileClient.findByUsernames(new ArrayList<>(userNames)).subscribe();
         return new HashSet<>(userMapper.mapToDto(users));
     }
 
     private void addUserAvatar(CreateUserRequest request, User user) {
         try {
             if (nonNull(request.getAvatarFile())) {
-                FileUploadResult fileSaveResponse = this.serverStorageClient.uploadFile(request.getAvatarFile());
-                user.setAvatar(fileSaveResponse.getLink());
+//                FileUploadResult fileSaveResponse = this.serverStorageClient.uploadFile(request.getAvatarFile());
+//                user.setAvatar(fileSaveResponse.getLink());
             }
         } catch (Exception e) {
             log.error("An error occurred while saving avatar for user: {}", user.getUsername(), e);

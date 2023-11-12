@@ -29,7 +29,7 @@ spring:
         - id: server-audit
           uri: http://127.0.0.1:8000
           predicates:
-            - Path=/audit/**
+            - Path=/audit/**"
         - id: comment
           uri: http://127.0.0.1:8001
           predicates:
@@ -37,23 +37,23 @@ spring:
         - id: server-comment
           uri: http://127.0.0.1:8001
           predicates:
-            - Path=/comment/**
-        - id: date
+            - Path=/comment/**"
+        - id: friendship
           uri: http://127.0.0.1:8002
+          predicates:
+            - Path=/friendship/**
+        - id: server-friendship
+          uri: http://127.0.0.1:8002
+          predicates:
+            - Path=/friendship/**"
+        - id: date
+          uri: http://127.0.0.1:8003
           predicates:
             - Path=/date/**
         - id: server-date
-          uri: http://127.0.0.1:8002
-          predicates:
-            - Path=/date/**
-        - id: iam
           uri: http://127.0.0.1:8003
           predicates:
-            - Path=/iam/**
-        - id: server-iam
-          uri: http://127.0.0.1:8003
-          predicates:
-            - Path=/iam/**
+            - Path=/date/**"
         - id: marketplace
           uri: http://127.0.0.1:8004
           predicates:
@@ -61,7 +61,7 @@ spring:
         - id: server-marketplace
           uri: http://127.0.0.1:8004
           predicates:
-            - Path=/marketplace/**
+            - Path=/marketplace/**"
         - id: notification
           uri: http://127.0.0.1:8005
           predicates:
@@ -69,7 +69,7 @@ spring:
         - id: server-notification
           uri: http://127.0.0.1:8005
           predicates:
-            - Path=/notification/**
+            - Path=/notification/**"
         - id: post
           uri: http://127.0.0.1:8006
           predicates:
@@ -77,7 +77,7 @@ spring:
         - id: server-post
           uri: http://127.0.0.1:8006
           predicates:
-            - Path=/post/**
+            - Path=/post/**"
         - id: profile
           uri: http://127.0.0.1:8007
           predicates:
@@ -85,7 +85,7 @@ spring:
         - id: server-profile
           uri: http://127.0.0.1:8007
           predicates:
-            - Path=/profile/**
+            - Path=/profile/**"
         - id: reply
           uri: http://127.0.0.1:8008
           predicates:
@@ -93,7 +93,7 @@ spring:
         - id: server-reply
           uri: http://127.0.0.1:8008
           predicates:
-            - Path=/reply/**
+            - Path=/reply/**"
         - id: storage
           uri: http://127.0.0.1:8009
           predicates:
@@ -101,31 +101,24 @@ spring:
         - id: server-storage
           uri: http://127.0.0.1:8009
           predicates:
-            - Path=/storage/**
+            - Path=/storage/**"
         - id: story
-          uri: http://127.0.0.1:80010
+          uri: http://127.0.0.1:8010
           predicates:
             - Path=/story/**
         - id: server-story
-          uri: http://127.0.0.1:80010
+          uri: http://127.0.0.1:8010
           predicates:
-            - Path=/story/**
+            - Path=/story/**"
         - id: tag
-          uri: http://127.0.0.1:80011
+          uri: http://127.0.0.1:8011
           predicates:
             - Path=/tag/**
         - id: server-tag
-          uri: http://127.0.0.1:80011
+          uri: http://127.0.0.1:8011
           predicates:
-            - Path=/tag/**
-        - id: friendship
-          uri: http://127.0.0.1:80012
-          predicates:
-            - Path=/friendship/**
-        - id: server-friendship
-          uri: http://127.0.0.1:80012
-          predicates:
-            - Path=/friendship/**
+            - Path=/tag/**"
+
 
 
   security:
@@ -171,111 +164,103 @@ spring:
               - "*"
             allowed-origin-patterns:
               - "*"
-      routes:
+      routes: &routes
         - id: audit
-          uri: http://127.0.0.1:8000
+          uri: http://audit:8000
           predicates:
             - Path=/audit/**
         - id: server-audit
           uri: http://audit:8000
           predicates:
-            - Path=/audit/**
+            - Path=/audit/**"
         - id: comment
-          uri: http://127.0.0.1:8001
+          uri: http://comment:8001
           predicates:
             - Path=/comment/**
         - id: server-comment
           uri: http://comment:8001
           predicates:
-            - Path=/comment/**
+            - Path=/comment/**"
+        - id: friendship
+          uri: http://friendship:8002
+          predicates:
+            - Path=/friendship/**
+        - id: server-friendship
+          uri: http://friendship:8002
+          predicates:
+            - Path=/friendship/**"
         - id: date
-          uri: http://127.0.0.1:8002
+          uri: http://date:8003
           predicates:
             - Path=/date/**
         - id: server-date
-          uri: http://date:8002
+          uri: http://date:8003
           predicates:
-            - Path=/date/**
-        - id: iam
-          uri: http://127.0.0.1:8003
-          predicates:
-            - Path=/iam/**
-        - id: server-iam
-          uri: http://iam:8003
-          predicates:
-            - Path=/iam/**
+            - Path=/date/**"
         - id: marketplace
-          uri: http://127.0.0.1:8004
+          uri: http://marketplace:8004
           predicates:
             - Path=/marketplace/**
         - id: server-marketplace
           uri: http://marketplace:8004
           predicates:
-            - Path=/marketplace/**
+            - Path=/marketplace/**"
         - id: notification
-          uri: http://127.0.0.1:8005
+          uri: http://notification:8005
           predicates:
             - Path=/notification/**
         - id: server-notification
           uri: http://notification:8005
           predicates:
-            - Path=/notification/**
+            - Path=/notification/**"
         - id: post
-          uri: http://127.0.0.1:8006
+          uri: http://post:8006
           predicates:
             - Path=/post/**
         - id: server-post
           uri: http://post:8006
           predicates:
-            - Path=/post/**
+            - Path=/post/**"
         - id: profile
-          uri: http://127.0.0.1:8007
+          uri: http://profile:8007
           predicates:
             - Path=/profile/**
         - id: server-profile
           uri: http://profile:8007
           predicates:
-            - Path=/profile/**
+            - Path=/profile/**"
         - id: reply
-          uri: http://127.0.0.1:8008
+          uri: http://reply:8008
           predicates:
             - Path=/reply/**
         - id: server-reply
           uri: http://reply:8008
           predicates:
-            - Path=/reply/**
+            - Path=/reply/**"
         - id: storage
-          uri: http://127.0.0.1:8009
+          uri: http://storage:8009
           predicates:
             - Path=/storage/**
         - id: server-storage
           uri: http://storage:8009
           predicates:
-            - Path=/storage/**
+            - Path=/storage/**"
         - id: story
-          uri: http://127.0.0.1:80010
+          uri: http://story:8010
           predicates:
             - Path=/story/**
         - id: server-story
-          uri: http://story:80010
+          uri: http://story:8010
           predicates:
-            - Path=/story/**
+            - Path=/story/**"
         - id: tag
-          uri: http://127.0.0.1:80011
+          uri: http://tag:8011
           predicates:
             - Path=/tag/**
         - id: server-tag
-          uri: http://tag:80011
+          uri: http://tag:8011
           predicates:
-            - Path=/tag/**
-        - id: friendship
-          uri: http://127.0.0.1:80012
-          predicates:
-            - Path=/friendship/**
-        - id: server-friendship
-          uri: http://friendship:80012
-          predicates:
-            - Path=/friendship/**
+            - Path=/tag/**"
 
   security:
     oauth2:
@@ -320,111 +305,7 @@ spring:
               - "*"
             allowed-origin-patterns:
               - "*"
-      routes:
-        - id: audit
-          uri: http://127.0.0.1:8000
-          predicates:
-            - Path=/audit/**
-        - id: server-audit
-          uri: http://audit:8000
-          predicates:
-            - Path=/audit/**
-        - id: comment
-          uri: http://127.0.0.1:8001
-          predicates:
-            - Path=/comment/**
-        - id: server-comment
-          uri: http://comment:8001
-          predicates:
-            - Path=/comment/**
-        - id: date
-          uri: http://127.0.0.1:8002
-          predicates:
-            - Path=/date/**
-        - id: server-date
-          uri: http://date:8002
-          predicates:
-            - Path=/date/**
-        - id: iam
-          uri: http://127.0.0.1:8003
-          predicates:
-            - Path=/iam/**
-        - id: server-iam
-          uri: http://iam:8003
-          predicates:
-            - Path=/iam/**
-        - id: marketplace
-          uri: http://127.0.0.1:8004
-          predicates:
-            - Path=/marketplace/**
-        - id: server-marketplace
-          uri: http://marketplace:8004
-          predicates:
-            - Path=/marketplace/**
-        - id: notification
-          uri: http://127.0.0.1:8005
-          predicates:
-            - Path=/notification/**
-        - id: server-notification
-          uri: http://notification:8005
-          predicates:
-            - Path=/notification/**
-        - id: post
-          uri: http://127.0.0.1:8006
-          predicates:
-            - Path=/post/**
-        - id: server-post
-          uri: http://post:8006
-          predicates:
-            - Path=/post/**
-        - id: profile
-          uri: http://127.0.0.1:8007
-          predicates:
-            - Path=/profile/**
-        - id: server-profile
-          uri: http://profile:8007
-          predicates:
-            - Path=/profile/**
-        - id: reply
-          uri: http://127.0.0.1:8008
-          predicates:
-            - Path=/reply/**
-        - id: server-reply
-          uri: http://reply:8008
-          predicates:
-            - Path=/reply/**
-        - id: storage
-          uri: http://127.0.0.1:8009
-          predicates:
-            - Path=/storage/**
-        - id: server-storage
-          uri: http://storage:8009
-          predicates:
-            - Path=/storage/**
-        - id: story
-          uri: http://127.0.0.1:80010
-          predicates:
-            - Path=/story/**
-        - id: server-story
-          uri: http://story:80010
-          predicates:
-            - Path=/story/**
-        - id: tag
-          uri: http://127.0.0.1:80011
-          predicates:
-            - Path=/tag/**
-        - id: server-tag
-          uri: http://tag:80011
-          predicates:
-            - Path=/tag/**
-        - id: friendship
-          uri: http://127.0.0.1:80012
-          predicates:
-            - Path=/friendship/**
-        - id: server-friendship
-          uri: http://friendship:80012
-          predicates:
-            - Path=/friendship/**
+      routes: *routes
 
   security:
     oauth2:

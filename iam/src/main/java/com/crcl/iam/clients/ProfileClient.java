@@ -7,11 +7,14 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import reactivefeign.spring.config.ReactiveFeignClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 
-@FeignClient(
+@ReactiveFeignClient(
         name = "${client.profile.name}",
         url = "${client.profile.url}",
         configuration = {
@@ -20,8 +23,8 @@ import java.util.List;
         })
 public interface ProfileClient {
     @GetMapping("/searches/username/{username}")
-    ProfileDto findByUsername(@PathVariable("username") String username);
+    Mono<ProfileDto> findByUsername(@PathVariable("username") String username);
 
     @GetMapping("/searches/profile/usernames")
-    List<ProfileDto> findByUsernames(@RequestParam("usernames") List<String> userNames);
+    Flux<ProfileDto> findByUsernames(@RequestParam("usernames") List<String> userNames);
 }

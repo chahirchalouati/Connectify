@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: tag
+  cloud:
+    config:
+      uri: http://localhost:8888
+    openfeign:
+      circuitbreaker:
+        alphanumeric-ids:
+          enabled: true
