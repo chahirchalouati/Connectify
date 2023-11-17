@@ -32,6 +32,7 @@ security:
   registrations:
     audit:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: audit
       uris:
@@ -44,6 +45,7 @@ security:
         - client_credentials
     comment:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: comment
       uris:
@@ -56,6 +58,7 @@ security:
         - client_credentials
     friendship:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: friendship
       uris:
@@ -68,6 +71,7 @@ security:
         - client_credentials
     date:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: date
       uris:
@@ -80,6 +84,7 @@ security:
         - client_credentials
     marketplace:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: marketplace
       uris:
@@ -92,6 +97,7 @@ security:
         - client_credentials
     notification:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: notification
       uris:
@@ -104,6 +110,7 @@ security:
         - client_credentials
     post:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: post
       uris:
@@ -116,6 +123,7 @@ security:
         - client_credentials
     profile:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: profile
       uris:
@@ -128,6 +136,7 @@ security:
         - client_credentials
     reply:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: reply
       uris:
@@ -140,6 +149,7 @@ security:
         - client_credentials
     storage:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: storage
       uris:
@@ -152,6 +162,7 @@ security:
         - client_credentials
     story:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: story
       uris:
@@ -164,6 +175,7 @@ security:
         - client_credentials
     tag:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: tag
       uris:
@@ -218,6 +230,7 @@ security:
   registrations:
     audit:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: audit
       uris:
@@ -230,6 +243,7 @@ security:
         - client_credentials
     comment:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: comment
       uris:
@@ -242,6 +256,7 @@ security:
         - client_credentials
     friendship:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: friendship
       uris:
@@ -254,6 +269,7 @@ security:
         - client_credentials
     date:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: date
       uris:
@@ -266,6 +282,7 @@ security:
         - client_credentials
     marketplace:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: marketplace
       uris:
@@ -278,6 +295,7 @@ security:
         - client_credentials
     notification:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: notification
       uris:
@@ -290,6 +308,7 @@ security:
         - client_credentials
     post:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: post
       uris:
@@ -302,6 +321,7 @@ security:
         - client_credentials
     profile:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: profile
       uris:
@@ -314,6 +334,7 @@ security:
         - client_credentials
     reply:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: reply
       uris:
@@ -326,6 +347,7 @@ security:
         - client_credentials
     storage:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: storage
       uris:
@@ -338,6 +360,7 @@ security:
         - client_credentials
     story:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: story
       uris:
@@ -350,6 +373,7 @@ security:
         - client_credentials
     tag:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: tag
       uris:
@@ -403,6 +427,7 @@ security:
   registrations:
     audit:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: audit
       uris:
@@ -415,6 +440,7 @@ security:
         - client_credentials
     comment:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: comment
       uris:
@@ -427,6 +453,7 @@ security:
         - client_credentials
     friendship:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: friendship
       uris:
@@ -439,6 +466,7 @@ security:
         - client_credentials
     date:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: date
       uris:
@@ -451,6 +479,7 @@ security:
         - client_credentials
     marketplace:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: marketplace
       uris:
@@ -463,6 +492,7 @@ security:
         - client_credentials
     notification:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: notification
       uris:
@@ -475,6 +505,7 @@ security:
         - client_credentials
     post:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: post
       uris:
@@ -487,6 +518,7 @@ security:
         - client_credentials
     profile:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: profile
       uris:
@@ -499,6 +531,7 @@ security:
         - client_credentials
     reply:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: reply
       uris:
@@ -511,6 +544,7 @@ security:
         - client_credentials
     storage:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: storage
       uris:
@@ -523,6 +557,7 @@ security:
         - client_credentials
     story:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: story
       uris:
@@ -535,6 +570,7 @@ security:
         - client_credentials
     tag:
       refresh-token-access-time-to-leave: 8000
+      secret: secret
       token-access-time-to-leave: 8000
       id: tag
       uris:

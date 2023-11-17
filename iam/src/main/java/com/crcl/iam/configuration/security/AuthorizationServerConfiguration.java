@@ -1,15 +1,10 @@
 package com.crcl.iam.configuration.security;
 
-import com.crcl.iam.configuration.props.SecurityProperties;
-import com.crcl.iam.configuration.web.CorsCustomizer;
-import com.crcl.iam.mappers.ClientMapper;
-import com.crcl.iam.repository.MongoClientRepository;
-import com.crcl.iam.repository.MongoRegisteredClientRepository;
-import com.crcl.iam.service.impl.ClientSettingsEnhancer;
 import com.crcl.core.configuration.CoreSwaggerConfiguration;
 import com.crcl.core.configuration.properties.ApiProperties;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
+import com.crcl.iam.configuration.props.Registration;
+import com.crcl.iam.configuration.props.SecurityProperties;
+import com.crcl.iam.configuration.web.CorsCustomizer;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
@@ -24,19 +19,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
-import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
-import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
-import java.security.KeyPair;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
+import java.util.List;
+import java.util.UUID;
 
 @Import({ApiProperties.class, CoreSwaggerConfiguration.class}) // TODO: 16/09/23 move to main class
 @Configuration(proxyBeanMethods = false)
@@ -69,10 +65,20 @@ public class AuthorizationServerConfiguration {
     }
 
     @Bean
-    public RegisteredClientRepository registeredClientRepository(final MongoClientRepository mongoClientRepository,
-                                                                 final ClientMapper clientMapper,
-                                                                 final ClientSettingsEnhancer clientSettingsEnhancer) {
-        return new MongoRegisteredClientRepository(mongoClientRepository, clientMapper, clientSettingsEnhancer);
+    public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder, SecurityProperties securityProperties) {
+
+        List<RegisteredClient> registeredClients = securityProperties.getRegistrations().entrySet().stream().map(registrarClient -> {
+            Registration registration = registrarClient.getValue();
+            return RegisteredClient.withId(registration.getId())
+                    .clientId(registration.getId())
+                    .clientSecret(passwordEncoder.encode(registration.getSecret()))
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                    .scopes(scopes -> scopes.addAll(registration.getScopes()))
+                    .redirectUris(redirectUris -> redirectUris.addAll(registration.getUris()))
+                    .build();
+        }).toList();
+        return new InMemoryRegisteredClientRepository(registeredClients);
     }
 
     @Bean
@@ -81,25 +87,11 @@ public class AuthorizationServerConfiguration {
     }
 
     @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
-        return new TokenCustomizer();
-    }
-
-    @Bean
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
         return OAuth2AuthorizationServerConfiguration
                 .jwtDecoder(jwkSource);
     }
 
-    @Bean
-    public JWKSource<SecurityContext> jwkSource(JwkProvider jwkProvider) {
-        KeyPair keyPair = jwkProvider.getKeyPair();
-        RSAKey rsaKey = new RSAKey.Builder((RSAPublicKey) keyPair.getPublic())
-                .privateKey((RSAPrivateKey) keyPair.getPrivate())
-                .keyID("authentication-server-key")
-                .build();
-        return (jwkSelector, securityContext) -> jwkSelector.select(new JWKSet(rsaKey));
-    }
 
     @Profile("dev")
     @Bean
