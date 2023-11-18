@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
         </dependency>
         <dependency>
             <groupId>com.crcl.connectify</groupId>
@@ -51,14 +51,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cloudyrock.mongock</groupId>
-            <artifactId>mongock-spring-v5</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cloudyrock.mongock</groupId>
-            <artifactId>mongodb-springdata-v3-driver</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -83,13 +75,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cloudyrock.mongock</groupId>
-                <artifactId>mongock-bom</artifactId>
-                <version>4.3.8</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

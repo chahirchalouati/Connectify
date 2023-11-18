@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 public class SwaggerConfiguration {
     @Bean
-    public CoreSwaggerConfiguration coreSwaggerConfiguration(ApiProperties apiProperties){
+    public CoreSwaggerConfiguration coreSwaggerConfiguration(ApiProperties apiProperties) {
         return new CoreSwaggerConfiguration(apiProperties);
     }
 }

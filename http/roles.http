@@ -1,0 +1,33 @@
+### Get Role
+
+GET /roles HTTP/1.1
+Host: {{local-server}}:9000
+Content-Type: application/json
+
+
+### Create new Role
+POST /roles HTTP/1.1
+Host: {{local-server}}:9000
+Content-Type: application/json
+
+{
+  "enabled": true,
+  "name": "ROLE_USER",
+  "permissions": []
+}
+### Update Role
+PUT /roles HTTP/1.1
+Host: {{local-server}}:9000
+Content-Type: application/json
+
+{
+  "enabled": true,
+  "name": "ROLE_USER",
+  "permissions": [
+    {
+      "id": "65591e8f3fc5d60d76206230",
+      "name": "PERMISSION_ADD_FRIENDS",
+      "enabled": true
+    }
+  ]
+}

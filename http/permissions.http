@@ -1,0 +1,10 @@
+
+### Create new Permission
+POST /permissions HTTP/1.1
+Host: {{local-server}}:9000
+Content-Type: application/json
+
+{
+  "enabled": true,
+  "name": "PERMISSION_ADD_FRIENDS"
+}

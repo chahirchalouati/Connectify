@@ -1,0 +1,373 @@
+GET https://www.jetbrains.com/help/idea/http-client-cli.html
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Cookie: cf_country-region=IT-65
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T214103.200.html
+
+###
+
+GET https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Cookie: cf_country-region=IT-65
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T214058.200.pdf
+
+###
+
+GET https://resources.jetbrains.com/help/img/idea/2023.1/http_request_name.png
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Cookie: cf_country-region=IT-65
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T214052.200.png
+
+###
+
+GET http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T214028.200.json
+
+###
+
+POST http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 65
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "enabled": true,
+  "name": "ROLE_USER",
+  "permissions": []
+}
+
+<> 2023-11-18T214024.200.json
+
+###
+
+GET http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T213959.200.json
+
+###
+
+GRPC grpcs://ijhttp-examples.jetbrains.com/hello.HelloService/SayHelloGET https://www.jetbrains.com/help/idea/http-client-cli.html
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Cookie: cf_country-region=IT-65
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T213642.200.html
+
+###
+
+GET https://www.jetbrains.com/help/idea/http-client-cli.html
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T213630.200.html
+
+###
+
+GET https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T213612.200.pdf
+
+###
+
+GET http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-18T213320.500.json
+
+###
+
+GET http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+PUT http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 182
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "enabled": true,
+  "name": "ROLE_USER",
+  "permissions": [
+    {
+      "id": "65591e8f3fc5d60d76206230",
+      "name": "PERMISSION_ADD_FRIENDS",
+      "enabled": true
+    }
+  ]
+}
+
+<> 2023-11-18T213026.405.json
+
+###
+
+POST http://localhost:9000/permissions
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 57
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "enabled": true,
+  "name": "PERMISSION_ADD_FRIENDS"
+}
+
+<> 2023-11-18T212903.200.json
+
+###
+
+POST http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 45
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "enabled": true,
+  "name": "ROLE_ADMIN"
+}
+
+<> 2023-11-18T212717.200.json
+
+###
+
+POST http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 44
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "enabled": true,
+  "name": "ROLE_USER"
+}
+
+<> 2023-11-18T212709.500.json
+
+###
+
+POST http://localhost:9000/roles
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 44
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "enabled": true,
+  "name": "ROLE_USER"
+}
+
+<> 2023-11-18T212704.200.json
+
+###
+
+POST http://localhost:9000/users
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 274
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johs1ndoe",
+  "email": "john.does1@esxample.com",
+  "avatar": "avatar-url",
+  "gender": "MALE",
+  "isAccountNonExpired": true,
+  "isEnabled": true,
+  "isCredentialsNonExpired": true,
+  "isAccountNonLocked": true
+}
+
+<> 2023-11-18T163623.200.json
+
+###
+
+POST http://localhost:9000/users
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 330
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johs1ndoe",
+  "email": "john.does1@esxample.com",
+  "avatar": "avatar-url",
+  "gender": "MALE",
+  "roles": [
+    {
+      "name": "ROLE_USER"
+    }
+  ],
+  "isAccountNonExpired": true,
+  "isEnabled": true,
+  "isCredentialsNonExpired": true,
+  "isAccountNonLocked": true
+}
+
+<> 2023-11-18T163610.400.json
+
+###
+
+POST http://localhost:9000/users
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johs1ndoe",
+  "email": "john.does1@esxample.com",
+  "avatar": "avatar-url",
+  "gender": "MALE",
+  "roles": ["ROLE_USER"],
+  "isAccountNonExpired": true,
+  "isEnabled": true,
+  "isCredentialsNonExpired": true,
+  "isAccountNonLocked": true
+}
+
+<> 2023-11-18T163233.200.json
+
+###
+
+POST http://localhost:9000/users
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 294
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johsndoe",
+  "email": "john.does@esxample.com",
+  "avatar": "avatar-url",
+  "gender": "MALE",
+  "roles": ["USER"],
+  "isAccountNonExpired": true,
+  "isEnabled": true,
+  "isCredentialsNonExpired": true,
+  "isAccountNonLocked": true
+}
+
+<> 2023-11-18T163154.500.json
+
+###
+
+POST http://localhost:9000/users
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 294
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johsndoe",
+  "email": "john.does@esxample.com",
+  "avatar": "avatar-url",
+  "gender": "MALE",
+  "roles": ["USER"],
+  "isAccountNonExpired": true,
+  "isEnabled": true,
+  "isCredentialsNonExpired": true,
+  "isAccountNonLocked": true
+}
+
+<> 2023-11-18T163142.500.json
+
+###
+
+POST http://localhost:9000/users
+Host: localhost:9000
+Content-Type: application/json
+Content-Length: 294
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.9)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "johsndoe",
+  "email": "john.does@esxample.com",
+  "avatar": "avatar-url",
+  "gender": "MALE",
+  "roles": ["USER"],
+  "isAccountNonExpired": true,
+  "isEnabled": true,
+  "isCredentialsNonExpired": true,
+  "isAccountNonLocked": true
+}
+
+<> 2023-11-18T163026.500.json
+
+###
+

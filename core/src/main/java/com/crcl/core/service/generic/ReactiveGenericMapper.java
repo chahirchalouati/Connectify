@@ -3,17 +3,23 @@ package com.crcl.core.service.generic;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.function.Function;
+public interface ReactiveGenericMapper<ENTITY, DTO> extends GenericMapper<ENTITY, DTO> {
 
-public interface ReactiveGenericMapper<E, D> {
+    default Mono<ENTITY> toReactiveEntity(DTO dto){
+        return Mono.just(toEntity(dto));
+    };
 
-        Mono<E> toEntity(D dto);
+    default Mono<DTO> toReactiveDto(ENTITY entity){
+        return Mono.just(toDto(entity));
+    };
 
-        Mono<D> toDto(E entity);
-
-        Flux<E> mapToEntity(Flux<D> dtoList);
-
-        Flux<D> mapToDto(Flux<E> entityList);
-
+    default Flux<ENTITY> mapToReactiveEntity(Flux<DTO> dtoList){
+        return dtoList.flatMap(this::toReactiveEntity);
     }
+
+    default  Flux<DTO> mapToReactiveDto(Flux<ENTITY> entityList){
+        return entityList.flatMap(this::toReactiveDto);
+    }
+
+}
 
