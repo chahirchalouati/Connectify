@@ -26,7 +26,7 @@ import static org.springframework.security.oauth2.core.endpoint.OAuth2ParameterN
 public class Oauth2ClientTokenInterceptor implements ReactiveHttpRequestInterceptor {
     private final RestTemplate restTemplate;
     private final OAuth2ClientProperties oAuth2ClientProperties;
-    @Value("${client.authentication.url}")
+    @Value("${client.iam.url}")
     private String IDP_URL;
 
     @Override

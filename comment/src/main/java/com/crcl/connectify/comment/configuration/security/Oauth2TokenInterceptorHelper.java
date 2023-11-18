@@ -23,7 +23,7 @@ public class Oauth2TokenInterceptorHelper {
     private RestTemplate restTemplate;
     @Autowired
     private OAuth2ClientProperties oAuth2ClientProperties;
-    @Value("${client.authentication.url}")
+    @Value("${client.iam.url}")
     private String IDP_URL;
 
     public String getClientAccessToken(String clientId, String password) {
