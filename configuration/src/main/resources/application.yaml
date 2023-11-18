@@ -42,3 +42,5 @@ spring:
       server:
         native:
           search-locations: classpath:/configuration
+          default-label: master
+          version: v1

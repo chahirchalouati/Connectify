@@ -27,7 +27,7 @@ import static org.springframework.cloud.openfeign.security.OAuth2AccessTokenInte
 public class CustomFilters {
 
     @Bean
-    public WebClient authenticationClient(@Value("${client.authentication.url}") String url) {
+    public WebClient authenticationClient(@Value("${client.iam.url}") String url) {
         return WebClient.create(url);
     }
 

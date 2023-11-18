@@ -49,7 +49,7 @@ spring:
       host: mongo
       port: 27017
       authentication-database: admin
-  security: &common-security
+  security:
     oauth2:
       resourceserver:
         jwt:
@@ -83,4 +83,26 @@ spring:
       host: mongo
       port: 27017
       authentication-database: admin
-  security: *common-security
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://authentication-service:9000
+          jwk-set-uri: http://authentication-service:9000/oauth2/jwks
+      client:
+        registration:
+          audit-service-oidc:
+            provider: crcl-com
+            client-id: audit-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope: openid
+          audit-service:
+            provider: crcl.com
+            client-id: audit-service
+            client-secret: secret
+            authorization-grant-type: client_credentials
+        provider:
+          crcl-com:
+            issuer-uri: http://authentication-service:9000
+            jwk-set-uri: http://authentication-service:9000/oauth2/jwks

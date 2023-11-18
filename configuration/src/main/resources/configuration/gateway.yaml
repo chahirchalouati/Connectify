@@ -118,8 +118,14 @@ spring:
           uri: http://127.0.0.1:8011
           predicates:
             - Path=/tag/**"
-
-
+        - id: server-iam
+          uri: http://127.0.0.1:9000
+          predicates:
+            - Path=/iam/**"
+        - id: iam
+          uri: http://127.0.0.1:9000
+          predicates:
+            - Path=/iam/**"
 
   security:
     oauth2:
@@ -164,7 +170,7 @@ spring:
               - "*"
             allowed-origin-patterns:
               - "*"
-      routes: &routes
+      routes:
         - id: audit
           uri: http://audit:8000
           predicates:
@@ -305,7 +311,103 @@ spring:
               - "*"
             allowed-origin-patterns:
               - "*"
-      routes: *routes
+      routes:
+        - id: audit
+          uri: http://audit:8000
+          predicates:
+            - Path=/audit/**
+        - id: server-audit
+          uri: http://audit:8000
+          predicates:
+            - Path=/audit/**"
+        - id: comment
+          uri: http://comment:8001
+          predicates:
+            - Path=/comment/**
+        - id: server-comment
+          uri: http://comment:8001
+          predicates:
+            - Path=/comment/**"
+        - id: friendship
+          uri: http://friendship:8002
+          predicates:
+            - Path=/friendship/**
+        - id: server-friendship
+          uri: http://friendship:8002
+          predicates:
+            - Path=/friendship/**"
+        - id: date
+          uri: http://date:8003
+          predicates:
+            - Path=/date/**
+        - id: server-date
+          uri: http://date:8003
+          predicates:
+            - Path=/date/**"
+        - id: marketplace
+          uri: http://marketplace:8004
+          predicates:
+            - Path=/marketplace/**
+        - id: server-marketplace
+          uri: http://marketplace:8004
+          predicates:
+            - Path=/marketplace/**"
+        - id: notification
+          uri: http://notification:8005
+          predicates:
+            - Path=/notification/**
+        - id: server-notification
+          uri: http://notification:8005
+          predicates:
+            - Path=/notification/**"
+        - id: post
+          uri: http://post:8006
+          predicates:
+            - Path=/post/**
+        - id: server-post
+          uri: http://post:8006
+          predicates:
+            - Path=/post/**"
+        - id: profile
+          uri: http://profile:8007
+          predicates:
+            - Path=/profile/**
+        - id: server-profile
+          uri: http://profile:8007
+          predicates:
+            - Path=/profile/**"
+        - id: reply
+          uri: http://reply:8008
+          predicates:
+            - Path=/reply/**
+        - id: server-reply
+          uri: http://reply:8008
+          predicates:
+            - Path=/reply/**"
+        - id: storage
+          uri: http://storage:8009
+          predicates:
+            - Path=/storage/**
+        - id: server-storage
+          uri: http://storage:8009
+          predicates:
+            - Path=/storage/**"
+        - id: story
+          uri: http://story:8010
+          predicates:
+            - Path=/story/**
+        - id: server-story
+          uri: http://story:8010
+          predicates:
+            - Path=/story/**"
+        - id: tag
+          uri: http://tag:8011
+          predicates:
+            - Path=/tag/**
+        - id: server-tag
+          uri: http://tag:8011
+          predicates:
+            - Path=/tag/**"
 
   security:
     oauth2:

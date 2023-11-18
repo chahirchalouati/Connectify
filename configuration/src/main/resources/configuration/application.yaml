@@ -72,12 +72,12 @@ web-socket:
   clientLogin: guest
   clientPasscode: guest
 client:
-  authentication:
-    url: http://localhost:9999/authentication
-    name: authentication
-  srvAuthentication:
-    url: http://localhost:9999/authentication
-    name: srvAuthentication
+  iam:
+    url: http://localhost:9999/iam
+    name: iam
+  sever-iam:
+    url: http://localhost:9999/iam
+    name: sever-iam
   audit:
     url: http://localhost:8000/audit
     name: audit
