@@ -43,6 +43,20 @@ security:
         - write.audit
       grantTypes:
         - client_credentials
+    client:
+      refresh-token-access-time-to-leave: 8000
+      secret: secret
+      token-access-time-to-leave: 8000
+      id: client
+      uris:
+        - http://localhost:4200
+        - https://oauth.pstmn.io/v1/callback
+      scopes:
+        - openid
+        - read.ui
+        - write.ui
+      grantTypes:
+        - client_credentials
     comment:
       refresh-token-access-time-to-leave: 8000
       secret: secret
