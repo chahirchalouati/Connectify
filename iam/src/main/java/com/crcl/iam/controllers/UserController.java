@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -41,7 +42,7 @@ public class UserController {
 
     @GetMapping
     public Mono<Page<UserDto>> findAll(Pageable pageable) {
-        return userService.findAll(pageable);
+        return userService.findAll(pageable).delayElement(Duration.ofSeconds(1));
     }
 
     @PutMapping("/{userId}")

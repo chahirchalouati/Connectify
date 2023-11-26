@@ -66,17 +66,15 @@ public class AuthorizationServerConfiguration {
     @Bean
     public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder, SecurityProperties securityProperties) {
 
-        List<RegisteredClient> registeredClients = securityProperties.getRegistrations().entrySet().stream().map(registrarClient -> {
-            Registration registration = registrarClient.getValue();
-            return RegisteredClient.withId(registration.getId())
-                    .clientId(registration.getId())
-                    .clientSecret(passwordEncoder.encode(registration.getSecret()))
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                    .scopes(scopes -> scopes.addAll(registration.getScopes()))
-                    .redirectUris(redirectUris -> redirectUris.addAll(registration.getUris()))
-                    .build();
-        }).toList();
+        List<RegisteredClient> registeredClients = securityProperties.getRegistrations().values().stream()
+                .map(registration -> RegisteredClient.withId(registration.getId())
+                        .clientId(registration.getId())
+                        .clientSecret(passwordEncoder.encode(registration.getSecret()))
+                        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                        .authorizationGrantTypes(types -> types.addAll(List.of(AuthorizationGrantType.CLIENT_CREDENTIALS, AuthorizationGrantType.AUTHORIZATION_CODE)))
+                        .scopes(scopes -> scopes.addAll(registration.getScopes()))
+                        .redirectUris(redirectUris -> redirectUris.addAll(registration.getUris()))
+                        .build()).toList();
         return new InMemoryRegisteredClientRepository(registeredClients);
     }
 

@@ -16,7 +16,7 @@ public class Permission {
     @Id
     private String id;
     private boolean enabled = true;
-    @Indexed(unique = true)
+    @Indexed(unique = true, background = true)
     private String name;
 
     public Permission(String name) {

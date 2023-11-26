@@ -17,7 +17,7 @@ public class Role {
     @Id
     private String id;
     private boolean enabled = true;
-    @Indexed(unique = true)
+    @Indexed(unique = true, background = true)
     private String name;
     private Set<Permission> permissions = new HashSet<>();
 
