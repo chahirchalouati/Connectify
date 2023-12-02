@@ -3,11 +3,9 @@ package com.crcl.iam.configurations.security;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 
-@Document
 @Data
 @Accessors(chain = true)
 public class MongoOAuth2Authorization {

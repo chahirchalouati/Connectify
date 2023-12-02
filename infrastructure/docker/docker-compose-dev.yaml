@@ -20,7 +20,14 @@ services:
       - minio:/export
     networks:
       - l_net
-
+  cassandra:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
+      - CASSANDRA_USERNAME=username
+      - CASSANDRA_PASSWORD=password
   mysql-db:
     image: mysql:8
     healthcheck:
@@ -38,12 +45,11 @@ services:
       - l_net
 
   zipkin:
-    image: openzipkin/zipkin-mysql
+    image: openzipkin/zipkin
+    container_name: zipkin
     environment:
-      - STORAGE_TYPE=mysql
-      - MYSQL_HOST=mysql-db
-      - MYSQL_USER=root
-      - MYSQL_PASS=root
+      - STORAGE_TYPE=mem
+      - MYSQL_HOST=mysql
     ports:
       - "9411:9411"
     networks:

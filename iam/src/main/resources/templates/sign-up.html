@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .step-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        button {
+            @apply py-2 px-4 mt-4;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+<form method="post" th:action="@{/authentication/sign-up}" th:object="${account}" id="signup-form" class="step-container">
+
+    <!-- Personal Information -->
+    <div id="step-1" class="step bg-white p-8 rounded shadow-md w-96">
+        <h2 class="text-2xl mb-4">Step 1: Personal Information</h2>
+
+        <label for="firstname" class="block mb-2">First Name:</label>
+        <input th:field="${account.userInformation.firstName}" type="text" id="firstname" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('userInformation.firstName')}" class="error-message" th:errors="*{userInformation.firstName}"></span>
+
+        <label for="lastname" class="block mb-2">Last Name:</label>
+        <input th:field="${account.userInformation.lastName}" type="text" id="lastname" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('userInformation.lastName')}" class="error-message" th:errors="*{userInformation.lastName}"></span>
+
+        <label for="birthdate" class="block mb-2">Birthdate:</label>
+        <input th:field="${account.userInformation.birthDate}" type="date" id="birthdate" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('userInformation.birthDate')}" class="error-message" th:errors="*{userInformation.birthDate}"></span>
+
+        <button type="submit" class="w-full bg-blue-500 text-white border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center font-bold py-2 px-4 mb-4 rounded-full">Next</button>
+    </div>
+
+    <!-- Contact Information -->
+    <div  id="step-2" class="step bg-white p-8 rounded shadow-md w-96">
+        <h2 class="text-2xl mb-4">Step 2: Contact Information</h2>
+
+        <label for="email" class="block mb-2">Email:</label>
+        <input th:field="${account.contactInformation.email}" type="email" id="email" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('contactInformation.email')}" class="error-message" th:errors="*{contactInformation.email}"></span>
+
+        <label for="phone" class="block mb-2">Phone:</label>
+        <input th:field="${account.contactInformation.phone}" type="tel" id="phone" class="w-full border p-2 mb-4" title="A valid phone number should start with a plus sign followed by the country code. The country code is 1 to 2 digits and can be followed by an optional space. After the country code, there can be an optional space. The main part of the phone number consists of 9 to 12 digits.">
+        <span th:if="${#fields.hasErrors('contactInformation.phone')}" class="error-message" th:errors="*{contactInformation.phone}"></span>
+
+        <label for="mobile" class="block mb-2">Mobile:</label>
+        <input th:field="${account.contactInformation.mobile}" type="tel" id="mobile" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('contactInformation.mobile')}" class="error-message" th:errors="*{contactInformation.mobile}"></span>
+
+        <div class="flex flex-row space-x-2">
+            <button type="button" class="w-full bg-gray-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center">Previous</button>
+            <button type="submit" class="w-full bg-blue-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center">Next</button>
+        </div>
+
+    </div>
+
+    <!-- Location Information -->
+    <div id="step-3" class="step bg-white p-8 rounded shadow-md w-96">
+        <h2 class="text-2xl mb-4">Step 2: Location Information</h2>
+
+        <label for="country" class="block mb-2">Country:</label>
+        <input th:field="${account.locationInformation.country}" type="text" id="country" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('locationInformation.country')}" class="error-message" th:errors="*{locationInformation.country}"></span>
+
+        <label for="city" class="block mb-2">City:</label>
+        <input th:field="${account.locationInformation.city}" type="text" id="city" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('locationInformation.city')}" class="error-message" th:errors="*{locationInformation.city}"></span>
+
+        <label for="street" class="block mb-2">Street:</label>
+        <input th:field="${account.locationInformation.street}" type="text" id="street" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('locationInformation.street')}" class="error-message" th:errors="*{locationInformation.street}"></span>
+
+        <label for="address" class="block mb-2">Address:</label>
+        <input th:field="${account.locationInformation.address}" type="text" id="address" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('locationInformation.address')}" class="error-message" th:errors="*{locationInformation.address}"></span>
+
+        <div class="flex flex-row space-x-2">
+            <button type="button" class="w-full bg-gray-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center">Previous</button>
+            <button type="submit" class="w-full bg-blue-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center">Next</button>
+        </div>
+
+    </div>
+
+    <div id="step-4" class="step bg-white p-8 rounded shadow-md w-96">
+        <h2 class="text-2xl mb-4">Step 3: Create Password</h2>
+
+        <label for="username" class="block mb-2">Username:</label>
+        <input th:field="${account.signUpInformation.username}" type="text" id="username" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('signUpInformation.username')}" class="error-message" th:errors="*{signUpInformation.username}"></span>
+
+
+        <label for="password" class="block mb-2">Password:</label>
+        <input th:field="${account.signUpInformation.password}" type="password" id="password" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('signUpInformation.password')}" class="error-message" th:errors="*{signUpInformation.password}"></span>
+
+        <label for="confirm-password" class="block mb-2">Confirm Password:</label>
+        <input th:field="${account.signUpInformation.confirmPassword}" type="password" id="confirm-password" class="w-full border p-2 mb-4">
+        <span th:if="${#fields.hasErrors('signUpInformation.confirmPassword')}" class="error-message" th:errors="*{signUpInformation.confirmPassword}"></span>
+
+        <div class="flex flex-row space-x-2">
+            <button type="button" class="w-full bg-gray-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center">Previous</button>
+            <button type="submit" class="w-full bg-blue-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center">Next</button>
+        </div>
+
+    </div>
+
+</form>
+</body>
+<script>
+    // JavaScript for handling form steps
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("signup-form");
+        const steps = form.querySelectorAll(".step");
+        let currentStep = 1;
+
+        function showStep(stepNumber) {
+            steps.forEach((step) => {
+                step.style.display = "none";
+            });
+
+            const currentStepElement = form.querySelector(`#step-${stepNumber}`);
+            if (currentStepElement) {
+                currentStepElement.style.display = "block";
+            }
+        }
+
+        function navigateToNextStep() {
+            if (currentStep < steps.length) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function navigateToPreviousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        // Add event listeners to the Next and Previous buttons
+        form.addEventListener("submit", function (event) {
+            // Prevent the form from submitting for this example
+            event.preventDefault();
+            // You can add your form submission logic here
+        });
+
+        const nextButton = form.querySelector('[type="submit"]');
+        const previousButton = form.querySelector('[type="button"]');
+
+        nextButton.addEventListener("click", navigateToNextStep);
+        previousButton.addEventListener("click", navigateToPreviousStep);
+
+        // Show the initial step
+        showStep(currentStep);
+    });
+</script>
+</html>

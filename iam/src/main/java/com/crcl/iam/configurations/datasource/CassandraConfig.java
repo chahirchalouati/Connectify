@@ -10,18 +10,19 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lombok.AllArgsConstructor;
 import org.springframework.cloud.openfeign.support.PageJacksonModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.cassandra.config.EnableReactiveCassandraAuditing;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 
 
 @Configuration
-@AllArgsConstructor
-public class MongoConfiguration {
+@EnableReactiveCassandraAuditing
+public class CassandraConfig {
+
     @Bean
     public ObjectMapper objectMapper() {
         SimpleModule simpleModule = new SimpleModule();
@@ -38,4 +39,5 @@ public class MongoConfiguration {
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
     }
+
 }

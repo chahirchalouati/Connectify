@@ -2,56 +2,83 @@ package com.crcl.iam.domain;
 
 import com.crcl.iam.validators.annotations.UniqueEmail;
 import com.crcl.iam.validators.annotations.UniqueUserName;
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.cassandra.core.cql.Ordering;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Document("users")
+@Table("users")
 @Data
-@Getter(AccessLevel.NONE)
-@ToString
-@EqualsAndHashCode
-@FieldNameConstants()
-public class User implements UserDetails {
-    @Id
-    private String id;
+@FieldNameConstants
+@NoArgsConstructor
+public class User {
+
+    @PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED, ordinal = 0)
+    private UUID id = UUID.randomUUID();
+
+    @PrimaryKeyColumn(type = PrimaryKeyType.CLUSTERED, ordinal = 1, ordering = Ordering.DESCENDING)
+    private UUID timeUUID = Uuids.timeBased();
+
     @NotBlank
+    @Column("first_name")
     private String firstName;
+
     @NotBlank
+    @Column(value = "last_name")
     private String lastName;
+
     @NotBlank
     @UniqueUserName
-    @Indexed(unique = true)
-    private String username;
+    @Column("user_name")
+    private String userName;
+
     @Email
     @UniqueEmail
-    @Indexed(unique = true)
+    @Column("email")
     private String email;
+
     @NotBlank
+    @Column("password")
     private String password;
+
     @NotBlank
+    @Column("avatar")
     private String avatar;
+
     @NotBlank
+    @Column("gender")
     private Gender gender;
-    @Getter(AccessLevel.NONE)
-    @DBRef
+
+    @Column("roles")
+    @CassandraType(type = CassandraType.Name.SET, typeArguments = CassandraType.Name.TEXT)
     private Set<Role> roles = new HashSet<>();
+
+    @Column("account_non_expired")
     private boolean isAccountNonExpired = true;
+
+    @Column("enabled")
     private boolean isEnabled = true;
+
+    @Column("credentials_non_expired")
     private boolean isCredentialsNonExpired = true;
+
+    @Column("account_non_locked")
     private boolean isAccountNonLocked = true;
 
     public boolean isAdmin() {
@@ -59,137 +86,13 @@ public class User implements UserDetails {
     }
 
     public boolean isSuperAdmin() {
-        return this.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
+        return this.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_SUPER_ADMIN"));
     }
 
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.getRoles().stream()
                 .map(Role::getName)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    public User setUsername(String username) {
-        this.username = username;
-        return this;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return this.isAccountNonExpired;
-    }
-
-    public User setAccountNonExpired(boolean accountNonExpired) {
-        isAccountNonExpired = accountNonExpired;
-        return this;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.isAccountNonLocked;
-    }
-
-    public User setAccountNonLocked(boolean accountNonLocked) {
-        isAccountNonLocked = accountNonLocked;
-        return this;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return this.isCredentialsNonExpired;
-    }
-
-    public User setCredentialsNonExpired(boolean credentialsNonExpired) {
-        isCredentialsNonExpired = credentialsNonExpired;
-        return this;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.isEnabled;
-    }
-
-    public User setEnabled(boolean enabled) {
-        isEnabled = enabled;
-        return this;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public User setId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public User setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public User setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public User setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public User setRoles(Set<Role> roles) {
-        this.roles = roles;
-        return this;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public User setAvatar(String avatar) {
-        this.avatar = avatar;
-        return this;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public User setGender(Gender gender) {
-        this.gender = gender;
-        return this;
     }
 }
