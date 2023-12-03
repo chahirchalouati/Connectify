@@ -2,14 +2,12 @@ package com.crcl.iam.configurations.security;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
 
 import java.time.Instant;
 
 @Data
 @Accessors(chain = true)
-public class MongoOAuth2Authorization {
-    @Id
+public class GenericOAuth2Authorization {
     private String id;
     private String registeredClientId;
     private String principalName;

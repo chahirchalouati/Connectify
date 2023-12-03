@@ -17,6 +17,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -56,6 +57,10 @@ public class User {
     @NotBlank
     @Column("password")
     private String password;
+
+    @NotBlank
+    @Column("birthDate")
+    private LocalDate birthDate;
 
     @NotBlank
     @Column("avatar")

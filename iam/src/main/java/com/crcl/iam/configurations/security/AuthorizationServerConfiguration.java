@@ -2,7 +2,6 @@ package com.crcl.iam.configurations.security;
 
 import com.crcl.core.configuration.CoreSwaggerConfiguration;
 import com.crcl.core.configuration.properties.ApiProperties;
-import com.crcl.iam.configurations.props.Registration;
 import com.crcl.iam.configurations.props.SecurityProperties;
 import com.crcl.iam.configurations.web.CorsCustomizer;
 import com.nimbusds.jose.jwk.source.JWKSource;

@@ -1,4 +1,4 @@
 package com.crcl.iam.configurations.security;
 
-public class MongoOAuth2AuthorizationService {
+public class GenericOAuth2AuthorizationService {
 }
