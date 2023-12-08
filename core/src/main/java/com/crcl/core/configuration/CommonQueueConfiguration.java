@@ -15,17 +15,17 @@ import java.util.List;
  * The CommonQueueConfiguration class is an abstract class that provides a configuration for common RabbitMQ queues.
  * It is meant to be extended by specific implementations to define the queues and their properties.
  * In order to use this configuration, make sure to annotate your class with @Import(CommonRabbitMQConfiguration.class).
- *
+ * <p>
  * The class provides two bean definitions:
  * - initDeclarables(): This bean initializes the RabbitMQ queues based on the values provided by the getQueues() method.
  *                      It returns a Declarables object containing the queue declarations.
  * - rabbitTemplate(ConnectionFactory, MessageConverter jsonMessageConverter): This bean creates a RabbitTemplate
  *                      used for sending and receiving messages from RabbitMQ. It sets the provided ConnectionFactory as the underlying
  *                      connection factory and uses the provided MessageConverter for converting the messages to and from JSON format.
- *
+ * <p>
  * To use this configuration, you need to implement the getQueues() method in your subclass, which should return a list of strings
  * representing the names of the queues to be declared.
- *
+ * <p>
  * This configuration also requires a CommonRabbitMQConfiguration class, which provides the necessary beans for message conversion
  * and serialization.
  */
@@ -61,7 +61,7 @@ public abstract class CommonQueueConfiguration {
 
     /**
      * Creates a RabbitTemplate for sending and receiving messages from RabbitMQ.
-     *
+     * <p>
      * This method initializes a RabbitTemplate instance with the provided ConnectionFactory and MessageConverter.
      * The ConnectionFactory is used as the underlying connection factory for the RabbitTemplate, while the MessageConverter
      * is used for converting the messages to and from JSON format.
