@@ -43,7 +43,7 @@ public class AuthenticationController {
         return "redirect:/authenticate?error=invalid username or password";
     }
 
-    @GetMapping("sign-up")
+    @GetMapping("register")
     @Operation(summary = "Retrieves the registration page.")
     public String registerPage(Model model) {
         model.addAttribute("account", new CreateAccount());
@@ -51,7 +51,7 @@ public class AuthenticationController {
         return "sign-up";
     }
 
-    @PostMapping("sign-up")
+    @PostMapping("register")
     @Operation(summary = "Saves a user account.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "The user was created successfully."),
