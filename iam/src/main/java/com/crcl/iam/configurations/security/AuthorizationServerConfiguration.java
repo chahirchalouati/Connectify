@@ -1,7 +1,5 @@
 package com.crcl.iam.configurations.security;
 
-import com.crcl.core.configuration.CoreSwaggerConfiguration;
-import com.crcl.core.configuration.properties.ApiProperties;
 import com.crcl.iam.configurations.props.SecurityProperties;
 import com.crcl.iam.configurations.web.CorsCustomizer;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -9,7 +7,6 @@ import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -36,7 +33,6 @@ import java.util.List;
  * The AuthorizationServerConfiguration class is responsible for configuring the authorization server settings
  * for the application. It defines the beans required for OAuth2 authentication and authorization.
  */
-@Import({ApiProperties.class, CoreSwaggerConfiguration.class}) // TODO: 16/09/23 move to main class
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 public class AuthorizationServerConfiguration {

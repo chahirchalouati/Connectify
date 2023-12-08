@@ -19,7 +19,7 @@ import static java.util.Objects.nonNull;
 /**
  * This class is a global exception handler for common exceptions that occur in the application.
  * It provides methods to handle specific exceptions and return appropriate error responses.
- *
+ * <p>
  * In order to use this class as a global exception handler, the class must be annotated with
  * the @ControllerAdvice annotation.
  */
@@ -51,18 +51,18 @@ public class CommonGlobalHandlerException {
      * Returns a ResponseEntity with the ErrorResponse object as the body and a
      * HTTP status code of 400 (Bad Request).
      *
-     * @param ex The BindException instance to be handled.
+     * @param exception The BindException instance to be handled.
      * @return A ResponseEntity containing the ErrorResponse object.
      */
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<ErrorResponse> handleBindException(BindException ex) {
+    public ResponseEntity<ErrorResponse> handleBindException(BindException exception) {
         Map<String, String> errors = new HashMap<>();
 
-        ex.getFieldErrors().stream()
+        exception.getFieldErrors().stream()
                 .filter(field -> field.getDefaultMessage() != null)
                 .forEach(fieldError -> errors.put(fieldError.getField(), fieldError.getDefaultMessage()));
 
-        ex.getGlobalErrors().stream()
+        exception.getGlobalErrors().stream()
                 .filter(globalError -> globalError.getDefaultMessage() != null)
                 .forEach(globalError -> errors.put(globalError.getObjectName(), globalError.getDefaultMessage()));
 

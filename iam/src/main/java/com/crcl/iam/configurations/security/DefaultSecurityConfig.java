@@ -36,7 +36,7 @@ public class DefaultSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/oauth2/**").permitAll()
                 .requestMatchers("/authentication/login/**").permitAll()
                 .requestMatchers("/authentication/register/**").permitAll()
-//                .requestMatchers("/authentication/roles/**", "/authentication/permissions/**").hasAnyRole("ADMIN")
+                .requestMatchers("/authentication/roles/**", "/authentication/permissions/**").hasAnyRole("ADMIN")
                 .anyRequest()
                 .authenticated();
     }
