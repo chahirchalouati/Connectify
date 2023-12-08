@@ -18,8 +18,12 @@
             height: 100vh;
         }
 
-        .step {
+        .hide {
             display: none;
+        }
+
+        .show {
+            display: block;
         }
 
         .error-message {
@@ -34,11 +38,11 @@
 
 <body class="bg-gray-100">
 
-<form class="step-container" id="signup-form" method="post" th:action="@{/authentication/sign-up}"
+<form class="step-container" id="signup-form" method="post" th:action="@{/authentication/register}"
       th:object="${account}">
 
     <!-- Personal Information -->
-    <div class="step bg-white p-8 rounded shadow-md w-96" id="step-1">
+    <div th:classappend="${account.step == 1 ? 'show' : 'hide'}" class=" bg-white p-8 rounded shadow-md w-96" id="step-1">
         <h2 class="text-2xl mb-4">Step 1: Personal Information</h2>
 
         <label class="block mb-2" for="firstname">First Name:</label>
@@ -57,6 +61,7 @@
                type="date">
         <span class="error-message" th:errors="*{userInformation.birthDate}"
               th:if="${#fields.hasErrors('userInformation.birthDate')}"></span>
+        <input type="hidden" th:field="${account.step}" th:value="1">
 
         <button class="w-full bg-blue-500 text-white border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center font-bold py-2 px-4 mb-4 rounded-full"
                 type="submit">
@@ -65,7 +70,8 @@
     </div>
 
     <!-- Contact Information -->
-    <div class="step bg-white p-8 rounded shadow-md w-96" id="step-2">
+    <div th:classappend="${account.step == 2 ? 'show' : 'hide'}" class=" bg-white p-8 rounded shadow-md w-96"
+         id="step-2">
         <h2 class="text-2xl mb-4">Step 2: Contact Information</h2>
 
         <label class="block mb-2" for="email">Email:</label>
@@ -74,7 +80,8 @@
               th:if="${#fields.hasErrors('contactInformation.email')}"></span>
 
         <label class="block mb-2" for="phone">Phone:</label>
-        <input class="w-full border p-2 mb-4" id="phone" th:field="${account.contactInformation.phone}" title="A valid phone number should start with a plus sign followed by the country code. The country code is 1 to 2 digits and can be followed by an optional space. After the country code, there can be an optional space. The main part of the phone number consists of 9 to 12 digits."
+        <input class="w-full border p-2 mb-4" id="phone" th:field="${account.contactInformation.phone}"
+               title="A valid phone number should start with a plus sign followed by the country code. The country code is 1 to 2 digits and can be followed by an optional space. After the country code, there can be an optional space. The main part of the phone number consists of 9 to 12 digits."
                type="tel">
         <span class="error-message" th:errors="*{contactInformation.phone}"
               th:if="${#fields.hasErrors('contactInformation.phone')}"></span>
@@ -83,7 +90,7 @@
         <input class="w-full border p-2 mb-4" id="mobile" th:field="${account.contactInformation.mobile}" type="tel">
         <span class="error-message" th:errors="*{contactInformation.mobile}"
               th:if="${#fields.hasErrors('contactInformation.mobile')}"></span>
-
+        <input type="hidden" th:field="${account.step}" th:value="2">
         <div class="flex flex-row space-x-2">
             <button class="w-full bg-gray-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center"
                     type="button">
@@ -98,7 +105,7 @@
     </div>
 
     <!-- Location Information -->
-    <div class="step bg-white p-8 rounded shadow-md w-96" id="step-3">
+    <div th:classappend="${account.step == 3 ? 'show' : 'hide'}"class=" bg-white p-8 rounded shadow-md w-96" id="step-3">
         <h2 class="text-2xl mb-4">Step 2: Location Information</h2>
 
         <label class="block mb-2" for="country">Country:</label>
@@ -122,7 +129,7 @@
                type="text">
         <span class="error-message" th:errors="*{locationInformation.address}"
               th:if="${#fields.hasErrors('locationInformation.address')}"></span>
-
+        <input type="hidden" th:field="${account.step}" th:value="3">
         <div class="flex flex-row space-x-2">
             <button class="w-full bg-gray-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center"
                     type="button">
@@ -136,7 +143,7 @@
 
     </div>
 
-    <div class="step bg-white p-8 rounded shadow-md w-96" id="step-4">
+    <div th:classappend="${account.step == 4 ? 'show' : 'hide'}" class=" bg-white p-8 rounded shadow-md w-96" id="step-4">
         <h2 class="text-2xl mb-4">Step 3: Create Password</h2>
 
         <label class="block mb-2" for="username">Username:</label>
@@ -153,11 +160,12 @@
               th:if="${#fields.hasErrors('signUpInformation.password')}"></span>
 
         <label class="block mb-2" for="confirm-password">Confirm Password:</label>
-        <input class="w-full border p-2 mb-4" id="confirm-password" th:field="${account.signUpInformation.confirmPassword}"
+        <input class="w-full border p-2 mb-4" id="confirm-password"
+               th:field="${account.signUpInformation.confirmPassword}"
                type="password">
         <span class="error-message" th:errors="*{signUpInformation.confirmPassword}"
               th:if="${#fields.hasErrors('signUpInformation.confirmPassword')}"></span>
-
+        <input type="hidden" th:field="${account.step}" th:value="4">
         <div class="flex flex-row space-x-2">
             <button class="w-full bg-gray-500 border border-gray-300 text-white font-bold py-2 px-4 mb-4 rounded-full flex items-center justify-center"
                     type="button">
@@ -173,53 +181,4 @@
 
 </form>
 </body>
-<script>
-    // JavaScript for handling form steps
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("signup-form");
-        const steps = form.querySelectorAll(".step");
-        let currentStep = 1;
-
-        function showStep(stepNumber) {
-            steps.forEach((step) => {
-                step.style.display = "none";
-            });
-
-            const currentStepElement = form.querySelector(`#step-${stepNumber}`);
-            if (currentStepElement) {
-                currentStepElement.style.display = "block";
-            }
-        }
-
-        function navigateToNextStep() {
-            if (currentStep < steps.length) {
-                currentStep++;
-                showStep(currentStep);
-            }
-        }
-
-        function navigateToPreviousStep() {
-            if (currentStep > 1) {
-                currentStep--;
-                showStep(currentStep);
-            }
-        }
-
-        // Add event listeners to the Next and Previous buttons
-        form.addEventListener("submit", function (event) {
-            // Prevent the form from submitting for this example
-            event.preventDefault();
-            // You can add your form submission logic here
-        });
-
-        const nextButton = form.querySelector('[type="submit"]');
-        const previousButton = form.querySelector('[type="button"]');
-
-        nextButton.addEventListener("click", navigateToNextStep);
-        previousButton.addEventListener("click", navigateToPreviousStep);
-
-        // Show the initial step
-        showStep(currentStep);
-    });
-</script>
 </html>

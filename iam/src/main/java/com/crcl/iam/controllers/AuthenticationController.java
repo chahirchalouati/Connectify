@@ -2,6 +2,7 @@ package com.crcl.iam.controllers;
 
 import com.crcl.iam.dto.CreateAccount;
 import com.crcl.iam.dto.UserDto;
+import com.crcl.iam.dto.UserInformation;
 import com.crcl.iam.servcies.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -12,7 +13,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +30,7 @@ import reactor.core.publisher.Mono;
 public class AuthenticationController {
 
     private final UserService userService;
+    private final Validator validator;
 
     @GetMapping("login")
     @Operation(summary = "Returns the login page.")
@@ -47,7 +52,7 @@ public class AuthenticationController {
     @Operation(summary = "Retrieves the registration page.")
     public String registerPage(Model model) {
         model.addAttribute("account", new CreateAccount());
-        model.addAttribute("step", 1);
+        model.addAttribute("step", 0);
         return "sign-up";
     }
 
@@ -58,8 +63,27 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "400", description = "The request body is invalid.")
     })
     public Mono<String> saveUser(@RequestBody(description = "The account to be created.", required = true)
-                                 @ModelAttribute("account") @Valid CreateAccount account, Errors errors) {
-        if (errors.hasErrors()) {
+                                 @ModelAttribute("account") @Valid CreateAccount account, BindingResult errors, Model model) {
+        UserInformation userInformation = account.getUserInformation();
+        Errors userInformationValidationErrors = new BeanPropertyBindingResult(userInformation, "userInformation");
+        validator.validate(userInformation, userInformationValidationErrors);
+
+
+        switch (account.getStep()) {
+            case 1 -> {
+                account.setStep(2);
+                model.addAttribute(account);
+            }
+            case 2 -> {
+                account.setStep(3);
+                model.addAttribute(account);
+            }
+            case 3 -> {
+                account.setStep(4);
+                model.addAttribute(account);
+            }
+        }
+        if (account.getStep() < 4) {
             return Mono.just("sign-up");
         }
 

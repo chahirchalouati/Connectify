@@ -74,19 +74,4 @@ public class CommonGlobalHandlerException {
         return new ResponseEntity<>(problemDetail, HttpStatus.BAD_REQUEST);
     }
 
-    /**
-     * Handles the runtime exceptions and generates a consistent error response.
-     *
-     * @param exception The runtime exception that occurred.
-     * @return The response entity containing the problem detail with the error information.
-     */
-    @ExceptionHandler({RuntimeException.class})
-    public ResponseEntity<?> runtimeException(RuntimeException exception) {
-        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        problemDetail.setTitle("Runtime Exception occurred");
-        problemDetail.setDetail(exception.getMessage());
-
-        return new ResponseEntity<>(problemDetail, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
 }
