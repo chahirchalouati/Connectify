@@ -1,5 +1,8 @@
 package com.crcl.core.utils;
 
+/**
+ * Utility class containing constants for permitted endpoints.
+ */
 public class EndpointsUtils {
 
     public interface Permitted {

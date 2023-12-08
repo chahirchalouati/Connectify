@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
+/**
+ * Represents the result of a file upload operation.
+ */
 @Data
 @Accessors(chain = true)
 public class FileUploadResult {

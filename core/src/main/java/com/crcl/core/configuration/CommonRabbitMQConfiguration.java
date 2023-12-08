@@ -18,13 +18,28 @@ import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 
+/**
+ * The CommonRabbitMQConfiguration class provides common configuration for RabbitMQ in a Spring application.
+ * It includes methods for creating a JSON message converter, configuring an object mapper, and other RabbitMQ-related operations.
+ */
 public class CommonRabbitMQConfiguration {
 
+    /**
+     * Creates a MessageConverter that converts messages to JSON using the provided ObjectMapper.
+     *
+     * @param objectMapper the ObjectMapper to be used for JSON conversion
+     * @return a MessageConverter that converts messages to JSON
+     */
     @Bean
     public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
         return new Jackson2JsonMessageConverter(objectMapper);
     }
 
+    /**
+     * Creates and configures an instance of the ObjectMapper class.
+     *
+     * @return The configured ObjectMapper instance.
+     */
     @Bean
     public ObjectMapper objectMapper() {
         final SimpleModule simpleModule = new SimpleModule();

@@ -9,6 +9,10 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+/**
+ * The ErrorResponse class represents an error response that can be returned by the application
+ * in case of errors or exceptions.
+ */
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

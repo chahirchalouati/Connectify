@@ -8,16 +8,23 @@ import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
 
+/**
+ * SortDeserializer is a custom deserializer for Sort objects. It extends the JsonDeserializer class and is used by the ObjectMapper to deserialize JSON nodes into Sort objects.
+ */
 public class SortDeserializer extends JsonDeserializer<Sort> {
+    /**
+     * Deserializes a JSON node into a Sort object.
+     *
+     * @param p the JsonParser object that provides access to the JSON node
+     * @param ctxt the DeserializationContext object for deserialization configuration
+     * @return a Sort object constructed from the sorting information in the JSON node
+     * @throws IOException if an I/O error occurs during deserialization
+     */
     @Override
     public Sort deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
-
-        // Extract sorting information from the JSON node and construct a Sort object
-        // Adjust the implementation according to your JSON structure
-
-        String property = node.get("property").asText();  // Assuming the property name is stored under "property" field
-        String direction = node.get("direction").asText();  // Assuming the sort direction is stored under "direction" field
+        String property = node.get("property").asText();
+        String direction = node.get("direction").asText();
 
         Sort.Direction sortDirection = Sort.Direction.fromString(direction);
         Sort.Order order = new Sort.Order(sortDirection, property);

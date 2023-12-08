@@ -4,6 +4,10 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Represents the API properties used for configuring the API information,
+ * such as title, description, version, etc.
+ */
 @ConfigurationProperties(prefix = "api")
 @Configuration
 @Data

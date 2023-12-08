@@ -32,6 +32,10 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import java.util.List;
 
+/**
+ * The AuthorizationServerConfiguration class is responsible for configuring the authorization server settings
+ * for the application. It defines the beans required for OAuth2 authentication and authorization.
+ */
 @Import({ApiProperties.class, CoreSwaggerConfiguration.class}) // TODO: 16/09/23 move to main class
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
@@ -45,6 +49,13 @@ public class AuthorizationServerConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Creates and configures the security filter chain for the OAuth2 authorization server.
+     *
+     * @param httpSecurity the HttpSecurity object to configure
+     * @return the configured SecurityFilterChain object
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -62,10 +73,17 @@ public class AuthorizationServerConfiguration {
                 .build();
     }
 
+    /**
+     * Creates a new RegisteredClientRepository with the given PasswordEncoder and SecurityProperties.
+     *
+     * @param passwordEncoder    The PasswordEncoder used to encode client secrets.
+     * @param securityProperties The SecurityProperties containing the client registration information.
+     * @return A RegisteredClientRepository instance populated with the registered clients.
+     */
     @Bean
     public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder, SecurityProperties securityProperties) {
 
-        List<RegisteredClient> registeredClients = securityProperties.getRegistrations().values().stream()
+        final List<RegisteredClient> registeredClients = securityProperties.getRegistrations().values().stream()
                 .map(registration -> RegisteredClient.withId(registration.getId())
                         .clientId(registration.getId())
                         .clientSecret(passwordEncoder.encode(registration.getSecret()))
@@ -77,11 +95,22 @@ public class AuthorizationServerConfiguration {
         return new InMemoryRegisteredClientRepository(registeredClients);
     }
 
+    /**
+     * Retrieves the provider settings for the authorization server.
+     *
+     * @return An instance of AuthorizationServerSettings that represents the provider settings.
+     */
     @Bean
     public AuthorizationServerSettings providerSettings() {
         return AuthorizationServerSettings.builder().issuer(securityProperties.getIssuer()).build();
     }
 
+    /**
+     * Creates a JwtDecoder using the provided JWKSource.
+     *
+     * @param jwkSource the JWKSource to use for decoding JWT tokens
+     * @return a JwtDecoder instance
+     */
     @Bean
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
         return OAuth2AuthorizationServerConfiguration
@@ -89,6 +118,11 @@ public class AuthorizationServerConfiguration {
     }
 
 
+    /**
+     * Creates and configures a CommonsRequestLoggingFilter to log request details.
+     *
+     * @return The configured CommonsRequestLoggingFilter.
+     */
     @Profile("dev")
     @Bean
     public CommonsRequestLoggingFilter requestLoggingFilter() {

@@ -26,18 +26,31 @@ import static org.springframework.cloud.openfeign.security.OAuth2AccessTokenInte
 @RequiredArgsConstructor
 public class CustomFilters {
 
+    /**
+     * Creates a WebClient instance for authentication.
+     *
+     * @param url the IAM URL to connect to
+     * @return a WebClient instance connected to the specified IAM URL
+     */
     @Bean
     public WebClient authenticationClient(@Value("${client.iam.url}") String url) {
         return WebClient.create(url);
     }
 
+    /**
+     * Returns a GlobalFilter that is enabled only when the profile is set to "dev".
+     *
+     * @param authenticationClient     The WebClient used for authentication.
+     * @param oAuth2ClientProperties   The properties for the OAuth2 client.
+     * @return The GlobalFilter to be used in the application.
+     */
     @Bean
     @Profile("dev")
     public GlobalFilter developFilter(WebClient authenticationClient,
                                       OAuth2ClientProperties oAuth2ClientProperties) {
         return (exchange, chain) -> {
             final var headers = exchange.getRequest().getHeaders();
-            final var hasDevUser = headers.toSingleValueMap().containsKey(DEV_USER);
+            final var hasDevUser = headers.toSingleValueMap().containsKey(DEV_USER.toLowerCase());
 
             if (hasDevUser) {
                 return authenticationClient.post()
@@ -49,7 +62,7 @@ public class CustomFilters {
                         .map(jsonObject -> CastUtils.<String>cast(jsonObject.get("access_token")))
                         .log("Setting token for an unauthenticated request", Level.INFO)
                         .flatMap(token -> {
-                            final var modifiedHeaders = new HttpHeaders();
+                            final HttpHeaders modifiedHeaders = new HttpHeaders();
                             modifiedHeaders.set(HttpHeaders.AUTHORIZATION, BEARER + SPACE + token);
 
                             ServerHttpRequest serverHttpRequest = exchange.getRequest()
@@ -69,6 +82,12 @@ public class CustomFilters {
         };
     }
 
+    /**
+     * Builds the form values required for OAuth 2.0 authentication.
+     *
+     * @param oAuth2ClientProperties The properties containing the client ID and client secret.
+     * @return The form values as a LinkedMultiValueMap object.
+     */
     public LinkedMultiValueMap<String, String> buildFormValues(OAuth2ClientProperties oAuth2ClientProperties) {
         Assert.notNull(oAuth2ClientProperties.getClientId(), "client_id can't be null");
         Assert.notNull(oAuth2ClientProperties.getClientSecret(), "secret can't be null");

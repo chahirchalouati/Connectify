@@ -22,6 +22,32 @@ public class DefaultSecurityConfig {
     private final CorsCustomizer corsCustomizer;
     private final SecurityProperties securityProperties;
 
+    /**
+     * Returns a customizer for configuring the authorization rules for HTTP requests.
+     *
+     * @return a Customizer object for configuring the authorization rules
+     */
+    @NotNull
+    private static Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> getHttpRequestsCustomizer() {
+        return registry -> registry
+                .requestMatchers(EndpointsUtils.Permitted.SWAGGER_END_POINTS).permitAll()
+                .requestMatchers(EndpointsUtils.Permitted.ACTUATOR_END_POINTS).permitAll()
+                .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/oauth2/**").permitAll()
+                .requestMatchers("/authentication/login/**").permitAll()
+                .requestMatchers("/authentication/register/**").permitAll()
+//                .requestMatchers("/authentication/roles/**", "/authentication/permissions/**").hasAnyRole("ADMIN")
+                .anyRequest()
+                .authenticated();
+    }
+
+    /**
+     * Returns a SecurityFilterChain for configuring security in the application.
+     *
+     * @param http the HttpSecurity object for configuring security
+     * @return a SecurityFilterChain for configuring security
+     * @throws Exception if an error occurs while configuring security
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         this.corsCustomizer.corsCustomizer(http);
@@ -33,19 +59,6 @@ public class DefaultSecurityConfig {
                 .oauth2ResourceServer(configurer -> configurer.jwt(Customizer.withDefaults()));
 
         return http.build();
-    }
-
-    @NotNull
-    private static Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> getHttpRequestsCustomizer() {
-        return registry -> registry
-                .requestMatchers(EndpointsUtils.Permitted.SWAGGER_END_POINTS).permitAll()
-                .requestMatchers(EndpointsUtils.Permitted.ACTUATOR_END_POINTS).permitAll()
-                .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
-                .requestMatchers("/authentication/login/**").permitAll()
-                .requestMatchers("/authentication/register/**").permitAll()
-                .requestMatchers("/authentication/roles/**", "/authentication/permissions/**").hasAnyRole("ADMIN")
-                .anyRequest()
-                .authenticated();
     }
 }
 

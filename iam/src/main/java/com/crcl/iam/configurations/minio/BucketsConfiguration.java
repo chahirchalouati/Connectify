@@ -1,6 +1,5 @@
 package com.crcl.iam.configurations.minio;
 
-
 import com.crcl.iam.configurations.props.BucketProperties;
 import com.crcl.iam.configurations.props.MinioProperties;
 import io.minio.BucketExistsArgs;
@@ -14,6 +13,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+
+/**
+ * Configuration class for handling bucket properties related operations with Minio.
+ */
 @Configuration
 @AllArgsConstructor
 @Slf4j
@@ -22,6 +25,12 @@ public class BucketsConfiguration {
     private final MinioClient minioClient;
     private final MinioProperties minioProperties;
 
+    /**
+     * Returns a CommandLineRunner that checks for bucket properties
+     * on application ready event and creates them if they do not exist.
+     *
+     * @return CommandLineRunner
+     */
     @Bean
     public CommandLineRunner handleApplicationReadyEvent() {
         return args -> {
@@ -36,6 +45,12 @@ public class BucketsConfiguration {
         };
     }
 
+    /**
+     * Attempts to create a bucket specified by the bucketProperties,
+     * if it doesn't already exist.
+     *
+     * @param bucketProperties The properties of the bucket to possibly create
+     */
     private void createBucketIfNotExists(BucketProperties bucketProperties) {
         try {
             if (!bucketExists(bucketProperties.getName())) {
@@ -47,6 +62,12 @@ public class BucketsConfiguration {
         }
     }
 
+    /**
+     * Checks if a bucket with specified name exists.
+     *
+     * @param bucketName The name of the bucket
+     * @return True if bucket exists, false otherwise
+     */
     private boolean bucketExists(String bucketName) {
         try {
             return minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
@@ -56,6 +77,11 @@ public class BucketsConfiguration {
         }
     }
 
+    /**
+     * Creates a new bucket using the bucketProperties specifications.
+     *
+     * @param bucketProperties The properties of the bucket to create
+     */
     private void makeBucket(BucketProperties bucketProperties) {
         try {
             minioClient.makeBucket(MakeBucketArgs.builder()
@@ -67,4 +93,3 @@ public class BucketsConfiguration {
         }
     }
 }
-

@@ -13,6 +13,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 @Table("roles")
 @Data
 @NoArgsConstructor

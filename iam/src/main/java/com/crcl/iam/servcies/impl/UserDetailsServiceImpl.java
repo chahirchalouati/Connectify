@@ -12,6 +12,10 @@ import reactor.core.publisher.Mono;
 
 import java.util.Collection;
 
+/**
+ * Implements the ReactiveUserDetailsService interface and provides user details based on the username.
+ * This class interacts with the UserRepository to retrieve user details.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -19,12 +23,24 @@ public class UserDetailsServiceImpl implements ReactiveUserDetailsService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Retrieves the user details based on the provided username.
+     *
+     * @param username the username to retrieve the user details for
+     * @return a Mono that emits the UserDetails object for the specified username
+     */
     @Override
     public Mono<UserDetails> findByUsername(String username) {
         return userRepository.findByUserName(username)
                 .map(this::toUserDetails);
     }
 
+    /**
+     * Converts a User object to UserDetails.
+     *
+     * @param user the User object to convert
+     * @return the converted UserDetails object
+     */
     private UserDetails toUserDetails(User user) {
         return new UserDetails() {
             @Override

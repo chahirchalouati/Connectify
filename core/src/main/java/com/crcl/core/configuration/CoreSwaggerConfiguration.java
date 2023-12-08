@@ -16,12 +16,30 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * The CoreSwaggerConfiguration class is responsible for configuring the Swagger API documentation.
+ * It initializes the OpenAPI object with API properties such as title, description, version, etc.
+ * It also creates a SecurityScheme object for Swagger API and UI.
+ *
+ * @see ApiProperties
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class CoreSwaggerConfiguration {
 
+    /**
+     * Represents the API properties used for configuring the API information,
+     * such as title, description, version, etc.
+     */
     private final ApiProperties apiProperties;
 
+    /**
+     * Creates and initializes an instance of {@link OpenAPI} with the provided API properties.
+     * This method is responsible for configuring the OpenAPI information including title, description,
+     * version, terms of service, contact, and license.
+     *
+     * @return The initialized {@link OpenAPI} instance.
+     */
     @Bean
     public OpenAPI api() {
         log.info("Initializing OpenAPI information: {}", apiProperties);
@@ -47,6 +65,14 @@ public class CoreSwaggerConfiguration {
                 .info(info);
     }
 
+    /**
+     * Creates and initializes a SecurityScheme object for Swagger API and UI.
+     * The SecurityScheme object represents the security definition for the API.
+     * This method is annotated with @Bean to indicate that it should be registered and managed as a bean by Spring.
+     * The SecurityScheme bean will only be created if both api.authorizationUrl and api.tokenUrl properties are present.
+     *
+     * @return the initialized SecurityScheme object
+     */
     @Bean
     @ConditionalOnProperty({"api.authorizationUrl", "api.tokenUrl"})
     public SecurityScheme securityScheme() {
