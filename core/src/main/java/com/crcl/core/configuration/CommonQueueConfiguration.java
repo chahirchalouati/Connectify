@@ -19,7 +19,7 @@ import java.util.List;
  * The class provides two bean definitions:
  * - initDeclarables(): This bean initializes the RabbitMQ queues based on the values provided by the getQueues() method.
  *                      It returns a Declarables object containing the queue declarations.
- * - rabbitTemplate(ConnectionFactory connectionFactory, MessageConverter jsonMessageConverter): This bean creates a RabbitTemplate
+ * - rabbitTemplate(ConnectionFactory, MessageConverter jsonMessageConverter): This bean creates a RabbitTemplate
  *                      used for sending and receiving messages from RabbitMQ. It sets the provided ConnectionFactory as the underlying
  *                      connection factory and uses the provided MessageConverter for converting the messages to and from JSON format.
  *
