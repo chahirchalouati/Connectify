@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -40,8 +41,9 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Invalid input"),
             @ApiResponse(responseCode = "500", description = "Server error")})
     @PostMapping
-    public Mono<UserDto> save(@RequestBody @Valid @Schema(description = "User to save") UserDto userDto) {
-        return userService.save(userDto);
+    public Mono<ServerResponse> save(@RequestBody @Valid @Schema(description = "User to save") UserDto userDto) {
+        return userService.save(userDto)
+                .map(user-> ServerResponse.accepted().body(user));
     }
 
     @Operation(summary = "Add a list of new users to the system")
