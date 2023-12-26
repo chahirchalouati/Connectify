@@ -31,7 +31,7 @@ public class UniqueUserNameAspect {
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    private class NonUniqueUserNameException extends RuntimeException {
+    private static class NonUniqueUserNameException extends RuntimeException {
         public NonUniqueUserNameException(String usernameIsNotUnique) {
         }
     }

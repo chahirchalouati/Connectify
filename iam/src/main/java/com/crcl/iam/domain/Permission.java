@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -23,9 +24,11 @@ public class Permission {
     private UUID timeUUID = Uuids.timeBased();
 
     @Column("enabled")
+    @CassandraType(type = CassandraType.Name.BOOLEAN)
     private boolean enabled = true;
 
     @Column("name")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String name;
 
     public Permission(String name) {

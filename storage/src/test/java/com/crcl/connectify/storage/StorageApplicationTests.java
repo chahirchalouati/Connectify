@@ -1,4 +1,4 @@
-package com.crcl.connectify.profile;
+package com.crcl.connectify.storage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -45,6 +45,19 @@ security:
         - write.audit
       grantTypes:
         - client_credentials
+    proxy-service:
+      refresh-token-access-time-to-leave: 8000
+      secret: secret
+      token-access-time-to-leave: 8000
+      id: proxy-service
+      uris:
+        - http://localhost:8000
+      scopes:
+        - openid
+        - read.proxy-service
+        - write.proxy-service
+      grantTypes:
+        - client_credentials
     client:
       refresh-token-access-time-to-leave: 8000
       secret: secret

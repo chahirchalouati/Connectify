@@ -38,36 +38,44 @@ public class User {
 
     @NotBlank
     @Column("first_name")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String firstName;
 
     @NotBlank
     @Column(value = "last_name")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String lastName;
 
     @NotBlank
     @UniqueUserName
     @Column("user_name")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String userName;
 
     @Email
     @UniqueEmail
     @Column("email")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String email;
 
     @NotBlank
     @Column("password")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String password;
 
     @NotBlank
     @Column("birthDate")
+    @CassandraType(type = CassandraType.Name.DATE)
     private LocalDate birthDate;
 
     @NotBlank
     @Column("avatar")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String avatar;
 
     @NotBlank
     @Column("gender")
+    @CassandraType(type = CassandraType.Name.TEXT)
     private Gender gender;
 
     @Column("roles")
@@ -75,15 +83,19 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @Column("account_non_expired")
+    @CassandraType(type = CassandraType.Name.BOOLEAN)
     private boolean isAccountNonExpired = true;
 
     @Column("enabled")
+    @CassandraType(type = CassandraType.Name.BOOLEAN)
     private boolean isEnabled = true;
 
     @Column("credentials_non_expired")
+    @CassandraType(type = CassandraType.Name.BOOLEAN)
     private boolean isCredentialsNonExpired = true;
 
     @Column("account_non_locked")
+    @CassandraType(type = CassandraType.Name.BOOLEAN)
     private boolean isAccountNonLocked = true;
 
     public boolean isAdmin() {
