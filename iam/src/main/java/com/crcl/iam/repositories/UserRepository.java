@@ -1,14 +1,14 @@
 package com.crcl.iam.repositories;
 
 import com.crcl.iam.domain.User;
-import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Mono;
 
 /**
  * The UserRepository interface is responsible for interacting with the database to perform CRUD operations on User objects.
  * It extends the ReactiveCassandraRepository interface and the CustomUserRepository interface.
  */
-public interface UserRepository extends ReactiveCassandraRepository<User, String>, CustomUserRepository {
+public interface UserRepository extends ReactiveMongoRepository<User, String>, CustomUserRepository {
 
     /**
      * Retrieves a User object from the database based on the provided username.

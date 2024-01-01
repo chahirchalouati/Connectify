@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,9 +39,8 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Invalid input"),
             @ApiResponse(responseCode = "500", description = "Server error")})
     @PostMapping
-    public Mono<ServerResponse> save(@RequestBody @Valid @Schema(description = "User to save") UserDto userDto) {
-        return userService.save(userDto)
-                .map(user-> ServerResponse.accepted().body(user));
+    public Mono<UserDto> save(@RequestBody @Valid @Schema(description = "User to save") UserDto userDto) {
+        return userService.save(userDto);
     }
 
     @Operation(summary = "Add a list of new users to the system")

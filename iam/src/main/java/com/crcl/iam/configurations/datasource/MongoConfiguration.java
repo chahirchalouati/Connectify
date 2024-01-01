@@ -13,15 +13,15 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.cloud.openfeign.support.PageJacksonModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.cassandra.config.EnableReactiveCassandraAuditing;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing;
 
 import java.time.LocalDateTime;
 
 
 @Configuration
-@EnableReactiveCassandraAuditing
-public class CassandraConfig {
+@EnableReactiveMongoAuditing
+public class MongoConfiguration {
 
     @Bean
     public ObjectMapper objectMapper() {

@@ -1,13 +1,13 @@
 package com.crcl.iam.repositories;
 
 import com.crcl.iam.domain.Role;
-import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Mono;
 
 /**
  * The RoleRepository interface provides methods for CRUD operations on Role entities using reactive programming.
  */
-public interface RoleRepository extends ReactiveCassandraRepository<Role, String> {
+public interface RoleRepository extends ReactiveMongoRepository<Role, String> {
 
     /**
      * Retrieves a {@link Mono} representing the role with the given name.
