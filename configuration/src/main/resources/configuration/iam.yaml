@@ -9,14 +9,12 @@ spring:
   config:
     activate:
       on-profile: dev
-  cassandra:
-    username: username
-    password: password
-    schema-action: CREATE_IF_NOT_EXISTS
-    contact-points: localhost
-    port: 9042
-    keyspace-name: iam_dev
-    local-datacenter: datacenter1
+  data:
+    mongodb:
+      database: dev_iam
+      host: localhost
+      port: 27017
+      authentication-database: admin
   security:
     oauth2:
       resourceserver:
@@ -238,7 +236,7 @@ spring:
       on-profile: docker
   data:
     mongodb:
-      database: dev_authentication
+      database: docker_iam
       host: mongo
       port: 27017
       authentication-database: admin
@@ -435,7 +433,7 @@ spring:
       on-profile: prod
   data:
     mongodb:
-      database: dev_authentication
+      database: prod_iam
       host: localhost
       port: 27017
       authentication-database: admin
