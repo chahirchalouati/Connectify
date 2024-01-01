@@ -1,5 +1,7 @@
 version: '3.3'
+
 services:
+
   minio:
     image: minio/minio
     container_name: minio
@@ -20,14 +22,7 @@ services:
       - minio:/export
     networks:
       - l_net
-  cassandra:
-    image: cassandra:latest
-    ports:
-      - "9042:9042"
-    environment:
-      - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
-      - CASSANDRA_USERNAME=username
-      - CASSANDRA_PASSWORD=password
+
   mysql-db:
     image: mysql:8
     healthcheck:
@@ -200,7 +195,6 @@ volumes:
   post-io:
   mysql-db:
   postgres-db:
-  cassandra-db:
   mongo-db:
   minio:
   elasticsearch-db:
