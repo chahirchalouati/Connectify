@@ -19,7 +19,6 @@ import org.springframework.web.servlet.function.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
 import java.util.List;
 
 /**
@@ -82,7 +81,7 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Server error")})
     @GetMapping
     public Mono<Page<UserDto>> findAll(Pageable pageable) {
-        return userService.findAll(pageable).delayElement(Duration.ofSeconds(1));
+        return userService.findAll(pageable);
     }
 
     @Operation(summary = "Updates a user in the system")
