@@ -16,4 +16,6 @@ public interface RoleRepository extends ReactiveMongoRepository<Role, String> {
      * @return a {@link Mono} emitting the role with the given name, or empty if not found
      */
     Mono<Role> findByName(String name);
+
+    boolean existsByNameIgnoreCase(String name);
 }

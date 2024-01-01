@@ -30,4 +30,6 @@ public interface PermissionRepository extends ReactiveMongoRepository<Permission
      * @return a Mono that emits the found Permission entity if it exists, or completes empty if not found
      */
     Mono<Permission> findByName(String name);
+
+    boolean existsByNameIgnoreCase(String name);
 }
