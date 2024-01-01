@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ReactiveUserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * Saves a UserDto object.
@@ -35,6 +37,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Mono<UserDto> save(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         return userMapper.toReactiveEntity(userDto)
                 .flatMap(userRepository::save)
