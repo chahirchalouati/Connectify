@@ -19,7 +19,7 @@
         <module>date</module>
         <module>gateway</module>
         <module>configuration</module>
-        <module>iam</module>
+        <module>identity</module>
         <module>storage</module>
         <module>notification</module>
         <module>audit</module>

@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>com.crcl.connectify</groupId>
-    <artifactId>iam</artifactId>
+    <artifactId>identity</artifactId>
     <version>1.0.1</version>
-    <name>iam-service</name>
-    <description>iam-service</description>
+    <name>identity</name>
+    <description>identity</description>
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
