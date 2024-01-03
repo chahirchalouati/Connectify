@@ -1,9 +1,6 @@
 package com.crcl.iam;
 
 import com.crcl.core.configuration.CommonApplicationConfiguration;
-import com.crcl.core.configuration.CoreSwaggerConfiguration;
-import com.crcl.core.configuration.properties.ApiProperties;
-import com.crcl.core.exceptions.CommonGlobalHandlerException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -16,10 +13,10 @@ import reactivefeign.spring.config.EnableReactiveFeignClients;
 @ConfigurationPropertiesScan("com.crcl.iam.configurations.*")
 @SpringBootApplication
 @EnableAspectJAutoProxy
-public class IamApplication {
+public class IdentityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IamApplication.class, args);
+        SpringApplication.run(IdentityApplication.class, args);
     }
 
 }

@@ -6,7 +6,7 @@
     <artifactId>connectify</artifactId>
     <version>1.0.0</version>
     <name>root</name>
-    <description>connectify</description>
+    <description>Connectify</description>
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
